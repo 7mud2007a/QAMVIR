@@ -251,7 +251,7 @@ export const defaultContactInfo: ContactInfo = {
   subtitle_en: "Reach out directly via social channels or send a message below.",
   whatsapp_number: "0930431817",
   telegram_username: "@Dev7mud",
-  instagram_username: "@dev7mud",
+  instagram_username: "@qamvir",
   contact_text_ar: "تواصل معي مباشرة لتنفيذ موقعك بأعلى جودة.",
   contact_text_en: "Reach out to get your high quality website created.",
 };
