@@ -116,7 +116,7 @@ CREATE TABLE IF NOT EXISTS public.contact_info (
   subtitle_en TEXT DEFAULT 'Reach out directly via social channels or send a message below.',
   whatsapp_number TEXT NOT NULL DEFAULT '0930431817',
   telegram_username TEXT NOT NULL DEFAULT '@Dev7mud',
-  instagram_username TEXT NOT NULL DEFAULT '@dev7mud',
+  instagram_username TEXT NOT NULL DEFAULT '@qamvir',
   contact_text_ar TEXT DEFAULT 'أنا جاهز للاستماع لمشروعك والإجابة عن جميع استفساراتك.',
   contact_text_en TEXT DEFAULT 'I am ready to hear about your project and answer all your questions.',
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
@@ -294,7 +294,7 @@ VALUES (
   'تواصل معي مباشرة عبر إحدى الوسائل التالية أو أرسل رسالتك هنا.', 'Reach out directly via social channels or send a message below.',
   '0930431817',
   '@Dev7mud',
-  '@dev7mud',
+  '@qamvir',
   'تواصل معي مباشرة لتنفيذ موقعك بأعلى جودة.',
   'Reach out to get your high quality website created.'
 )
