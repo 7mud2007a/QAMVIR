@@ -68,7 +68,7 @@ export const translations = {
       telegramLabel: "تيليجرام",
       telegramSub: "@Coder7mud",
       instagramLabel: "إنستغرام",
-      instagramSub: "@dev7mud",
+      instagramSub: "@qamvir",
     },
     footer: {
       rights: "جميع الحقوق محفوظة © 2026 حمود (7mud)",
@@ -145,7 +145,7 @@ export const translations = {
       telegramLabel: "Telegram",
       telegramSub: "@Coder7mud",
       instagramLabel: "Instagram",
-      instagramSub: "@dev7mud",
+      instagramSub: "@qamvir",
     },
     footer: {
       rights: "All rights reserved © 2026 7mud",
