@@ -23,7 +23,7 @@ export const ContactSection: React.FC = () => {
   const cleanTelegram = (contactInfo.telegram_username || "@Dev7mud").replace("@", "");
   const telegramUrl = `https://t.me/${cleanTelegram}`;
 
-  const cleanInstagram = (contactInfo.instagram_username || "@dev7mud").replace("@", "");
+  const cleanInstagram = (contactInfo.instagram_username || "@qamvir").replace("@", "");
   const instagramUrl = `https://instagram.com/${cleanInstagram}`;
 
   return (
