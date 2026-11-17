@@ -15,8 +15,8 @@ export const ProjectsSection: React.FC = () => {
       id: "r2-car",
       title_ar: "R2 Car",
       title_en: "R2 Car",
-      description_ar: "موقع R2 Car من تطويري — تجربة ويب عصرية لعرض خدمات السيارات بشكل احترافي.",
-      description_en: "R2 Car — a modern web experience I developed for presenting car services professionally.",
+      description_ar: "موقع R2 Car من تطويرنا — تجربة ويب عصرية لعرض خدمات السيارات بشكل احترافي.",
+      description_en: "R2 Car — a modern web experience we developed for presenting car services professionally.",
       technologies: ["Next.js", "React", "Responsive Design"],
       project_url: "https://r2-car.onrender.com/",
       github_url: "",
@@ -25,10 +25,10 @@ export const ProjectsSection: React.FC = () => {
     },
   ];
 
-  const badgeText = isAr ? "أعمالي ومشاريعي" : "FEATURED PROJECTS";
-  const titleText = isAr ? "مشاريع قمت بتطويرها حديثاً" : "Recent Work & Web Applications";
+  const badgeText = isAr ? "أعمالنا ومشاريعنا" : "FEATURED PROJECTS";
+  const titleText = isAr ? "مشاريع طوّرناها حديثاً" : "Recent Work & Web Applications";
   const subtitleText = isAr
-    ? "تصفح بعض النماذج الحية لمواقع ومنصات إلكترونية صممتها وطورتها باحترافية."
+    ? "تصفح بعض النماذج الحية لمواقع ومنصات إلكترونية صممناها وطوّرناها باحترافية."
     : "Explore live interactive web projects designed and developed with precision.";
 
   return (
