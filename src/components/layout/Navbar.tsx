@@ -234,7 +234,6 @@ export const Navbar: React.FC = () => {
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-[100] px-4 sm:px-8 py-4 transition-all duration-300">
-        <style>{'@import url("https://fonts.googleapis.com/css2?family=Krona+One&display=swap");'}</style>
         <div
           className={`max-w-7xl mx-auto rounded-2xl transition-all duration-300 px-4 sm:px-6 py-3 flex items-center justify-between border ${
             scrolled
@@ -295,18 +294,18 @@ export const Navbar: React.FC = () => {
               aria-expanded={mobileMenuOpen}
               aria-controls="qamvir-mobile-navigation"
             >
-              <span className="qamvir-menu-bg absolute inset-0 rounded-[25%] bg-black shadow-[0_8px_25px_rgba(0,0,0,0.4)] dark:bg-white" />
+              <span className="qamvir-menu-bg absolute inset-0 rounded-[25%] bg-black shadow-[0_8px_25px_rgba(0,0,0,0.4)]" />
               <span className="sr-only">{mobileMenuOpen ? "Close menu" : "Open menu"}</span>
               <span className="relative z-10 h-5 w-5 overflow-hidden" aria-hidden="true">
                 <svg
                   viewBox="0 0 448 512"
-                  className="qamvir-menu-line absolute left-1/2 top-1/2 h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 fill-white dark:fill-black"
+                  className="qamvir-menu-line absolute left-1/2 top-1/2 h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 fill-white"
                 >
                   <path d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z" />
                 </svg>
                 <svg
                   viewBox="0 0 320 512"
-                  className="qamvir-menu-close absolute left-1/2 top-1/2 h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 fill-white dark:fill-black"
+                  className="qamvir-menu-close absolute left-1/2 top-1/2 h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 fill-white"
                 >
                   <path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z" />
                 </svg>
@@ -322,7 +321,7 @@ export const Navbar: React.FC = () => {
             ref={menuRef}
             id="qamvir-mobile-navigation"
             aria-hidden={!mobileMenuOpen}
-            className="fixed inset-0 z-[99] flex h-[100dvh] w-full items-center overflow-hidden bg-black text-white dark:bg-white dark:text-black"
+            className="fixed inset-0 z-[99] flex h-[100dvh] w-full items-center overflow-hidden bg-black text-white"
             dir={language === "ar" ? "rtl" : "ltr"}
             style={{ clipPath: "circle(0px at 0px 0px)" }}
           >
@@ -337,13 +336,10 @@ export const Navbar: React.FC = () => {
                   <a
                     href={item.href}
                     tabIndex={mobileMenuOpen ? 0 : -1}
-                    className="relative inline-block font-bold uppercase tracking-[-0.02em] text-white/35 no-underline transition-all duration-300 group-hover:translate-x-1 group-hover:tracking-[0.02em] group-hover:text-white group-hover:[text-shadow:0_0_20px_rgba(255,255,255,0.4)] dark:text-black/35 dark:group-hover:text-black dark:group-hover:[text-shadow:0_0_20px_rgba(0,0,0,0.35)]"
-                    style={{
-                      fontFamily: "'Krona One', sans-serif",
-                      fontSize: "clamp(1.8rem, 6vw, 4.5rem)",
-                    }}
+                    className="relative inline-block font-sans font-bold uppercase tracking-[-0.02em] text-white/35 no-underline transition-all duration-300 group-hover:translate-x-1 group-hover:tracking-[0.02em] group-hover:text-white group-hover:[text-shadow:0_0_20px_rgba(255,255,255,0.4)]"
+                    style={{ fontSize: "clamp(1.8rem, 6vw, 4.5rem)" }}
                   >
-                    <span className="absolute -left-10 top-1/2 h-2 w-[25px] -translate-y-1/2 rounded-full bg-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:bg-black" />
+                    <span className="absolute -left-10 top-1/2 h-2 w-[25px] -translate-y-1/2 rounded-full bg-white opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                     {item.label}
                   </a>
                 </li>
