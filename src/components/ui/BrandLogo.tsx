@@ -84,7 +84,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
       {showText && (
         <div className="flex flex-col">
           <span className="text-xl font-black tracking-tight text-neutral-950 dark:text-white font-sans leading-none">
-            {language === "ar" ? "حمود" : "7mud"}
+            {language === "ar" ? "QAMVIR" : "QAMVIR"}
           </span>
           <span className="text-[10px] tracking-widest text-neutral-500 dark:text-neutral-400 font-mono uppercase mt-1">
             {language === "ar" ? "تصميم وتطوير ويب" : "Web Developer"}
