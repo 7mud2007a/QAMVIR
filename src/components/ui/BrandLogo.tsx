@@ -17,66 +17,66 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
   return (
     <div className="flex items-center gap-3 select-none group cursor-pointer">
       <div className={`relative flex items-center justify-center ${className}`}>
-        {/* Clean, smoothly curved vector version of the supplied monogram */}
+        {/* Monolithic Geometric Monochrome "7" SVG */}
         <svg
-          viewBox="0 0 620 540"
+          viewBox="0 0 100 100"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="relative w-full h-full drop-shadow-sm transition-transform duration-300 group-hover:scale-105 text-neutral-900 dark:text-white"
-          role="img"
-          aria-label="QAMVIR logo"
-          shapeRendering="geometricPrecision"
+          className="relative w-full h-full drop-shadow-sm transition-transform duration-300 group-hover:scale-105"
         >
-          {/* Rounded outer Q-shaped ring */}
+          <defs>
+            <linearGradient
+              id="brand7GradientDark"
+              x1="0%"
+              y1="0%"
+              x2="100%"
+              y2="100%"
+            >
+              <stop offset="0%" stopColor="#ffffff" />
+              <stop offset="100%" stopColor="#a3a3a3" />
+            </linearGradient>
+
+            <linearGradient
+              id="brand7AccentDark"
+              x1="0%"
+              y1="0%"
+              x2="100%"
+              y2="0%"
+            >
+              <stop offset="0%" stopColor="#e5e5e5" />
+              <stop offset="100%" stopColor="#737373" />
+            </linearGradient>
+          </defs>
+
+          {/* Outer Monochromatic Frame */}
           <path
-            d="M278 18
-               C165 18 76 80 35 176
-               C-7 275 22 388 101 456
-               C143 492 192 513 246 520
-               L205 431
-               C137 401 95 337 95 260
-               C95 158 171 83 274 83
-               C344 83 405 122 434 184
-               L474 100
-               C430 48 360 18 278 18Z"
+            d="M 10 15 L 90 15 L 85 28 L 22 28 L 22 30 L 78 30 L 42 88 L 26 88 L 58 35 L 10 35 Z"
             fill="currentColor"
+            className="text-neutral-900 dark:text-white"
           />
 
-          {/* Inner diagonal stroke of the monogram */}
+          {/* Angular Precision Cut Lines */}
           <path
-            d="M202 142
-               L251 112
-               L390 421
-               L354 520
-               L296 520
-               L151 210
-               C148 204 149 197 153 192
-               L202 142Z
-               M204 181
-               L185 202
-               L316 478
-               L333 478
-               L356 420
-               L236 151
-               L204 181Z"
+            d="M 28 20 L 82 20 L 78 26 L 24 26 Z"
             fill="currentColor"
-            fillRule="evenodd"
-            clipRule="evenodd"
+            className="text-neutral-400 dark:text-neutral-500"
+            opacity="0.85"
           />
 
-          {/* Clean rising right-hand stroke and lower arm */}
           <path
-            d="M510 22
-               H615
-               L454 357
-               C450 365 451 374 457 381
-               L590 520
-               H485
-               L371 397
-               L411 313
-               L444 348
-               L510 22Z"
+            d="M 46 88 L 52 88 L 74 52 L 68 52 Z"
             fill="currentColor"
+            className="text-neutral-400 dark:text-neutral-500"
+            opacity="0.75"
+          />
+
+          {/* Precision Corner Accent Point */}
+          <circle
+            cx="86"
+            cy="18"
+            r="3"
+            fill="currentColor"
+            className="text-neutral-900 dark:text-white"
           />
         </svg>
       </div>
