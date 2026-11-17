@@ -21,6 +21,7 @@ type GsapTimeline = {
 
 type GsapApi = {
   timeline(options: { paused: boolean }): GsapTimeline;
+  set(target: Element | null, vars: Record<string, unknown>): void;
 };
 
 declare global {
@@ -64,6 +65,9 @@ export const Navbar: React.FC = () => {
       const closeIcon = nav.parentElement?.querySelector(".qamvir-menu-close");
       const buttonBg = button.querySelector(".qamvir-menu-bg");
       const items = nav.querySelectorAll("li");
+
+      gsap.set(lineIcon, { opacity: 1, yPercent: 0 });
+      gsap.set(closeIcon, { opacity: 0, yPercent: 125 });
 
       open
         .set(button, { pointerEvents: "none" })
@@ -302,7 +306,6 @@ export const Navbar: React.FC = () => {
                 <svg
                   viewBox="0 0 320 512"
                   className="qamvir-menu-close absolute left-1/2 top-1/2 h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 fill-white dark:fill-black"
-                  style={{ opacity: 0, transform: "translate(-50%, -50%) translateY(125%)" }}
                 >
                   <path d="M310.6 361.4c12.5 12.5 32.8 12.5 45.3 0L160 301.3 54.7 406.7c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L114.7 256 9.4 150.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 210.7l105.3-105.4c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3L205.3 256l105.3 105.4z" />
                 </svg>
