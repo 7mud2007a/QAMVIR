@@ -50,6 +50,7 @@ export const Navbar: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    if (!mounted) return;
     let cancelled = false;
     let script = document.querySelector<HTMLScriptElement>('script[data-qamvir-gsap="true"]');
     const initialize = () => {
@@ -173,7 +174,7 @@ export const Navbar: React.FC = () => {
       openTl.current = null;
       closeTl.current = null;
     };
-  }, [language]);
+  }, [language, mounted]);
 
   const toggleMobileMenu = useCallback(() => {
     if (!menuReady || !openTl.current || !closeTl.current) return;
