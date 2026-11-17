@@ -10,7 +10,6 @@ export const Hero: React.FC = () => {
   const { language, heroContent, contactInfo, isLoadingContent } = useApp();
 
   const isAr = language === "ar";
-  const statusBadge = isAr ? heroContent.status_badge_ar : heroContent.status_badge_en;
   const titlePrefix = isAr ? heroContent.title_prefix_ar : heroContent.title_prefix_en;
   const titleHighlight = isAr ? heroContent.title_highlight_ar : heroContent.title_highlight_en;
   const titleSuffix = isAr ? heroContent.title_suffix_ar : heroContent.title_suffix_en;
@@ -46,24 +45,6 @@ export const Hero: React.FC = () => {
               alt="Hero Logo"
               className="w-full h-full object-cover"
             />
-          </motion.div>
-        )}
-
-        {/* Status Badge */}
-        {statusBadge && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neutral-100 dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-800 text-xs sm:text-sm font-medium mb-8 text-neutral-800 dark:text-neutral-200 shadow-sm"
-          >
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-neutral-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-neutral-900 dark:bg-white"></span>
-            </span>
-            <span className="font-semibold text-neutral-900 dark:text-neutral-100">
-              {statusBadge}
-            </span>
           </motion.div>
         )}
 
