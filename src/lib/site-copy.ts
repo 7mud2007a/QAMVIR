@@ -64,11 +64,11 @@ export interface SiteCopy {
 }
 
 export const defaultSiteCopy: SiteCopy = {
-  nav_cta_ar: "تواصل معي",
+  nav_cta_ar: "تواصل معنا",
   nav_cta_en: "Contact Me",
-  services_badge_ar: "مميزات العمل معي",
+  services_badge_ar: "مميزات العمل معنا",
   services_badge_en: "WHAT YOU GET",
-  services_title_ar: "ما الذي تحصل عليه عند العمل معي؟",
+  services_title_ar: "ما الذي تحصل عليه عند العمل معنا؟",
   services_title_en: "Key Features & Advantages",
   services_subtitle_ar: "خدمات متكاملة تضمن حصولك على موقع ويب احترافي يدعم نمو أعمالك.",
   services_subtitle_en: "Comprehensive web development services ensuring a professional site that grows your business.",
@@ -124,8 +124,8 @@ export const defaultSiteCopy: SiteCopy = {
   contact_instagram_label_en: "Instagram",
   contact_form_success_title_ar: "شكراً لك!",
   contact_form_success_title_en: "Thank You!",
-  contact_form_success_ar: "تم إرسال رسالتك بنجاح! سأتواصل معك في أقرب وقت ممكن.",
-  contact_form_success_en: "Message sent successfully! I will respond promptly.",
+  contact_form_success_ar: "تم إرسال رسالتك بنجاح! سنتواصل معك في أقرب وقت ممكن.",
+  contact_form_success_en: "Message sent successfully! We will respond promptly.",
   contact_name_label_ar: "الاسم الكامل",
   contact_name_label_en: "Full Name",
   contact_name_placeholder_ar: "اكتب اسمك هنا...",
@@ -139,7 +139,7 @@ export const defaultSiteCopy: SiteCopy = {
   contact_send_ar: "إرسال الرسالة",
   contact_send_en: "Send Message",
   footer_tagline_ar: "تصميم وتطوير مواقع ويب عصرية وسريعة مخصصة لعلامتك التجارية.",
-  footer_tagline_en: "Designing and building modern, high-performance websites tailored to your brand.",
+  footer_tagline_en: "We design and build modern, high-performance websites tailored to your brand.",
   footer_rights_ar: "جميع الحقوق محفوظة © 2026 QAMVIR (QAMVIR)",
   footer_rights_en: "All rights reserved © 2026 QAMVIR",
   footer_scroll_top_ar: "للأعلى",
@@ -151,5 +151,5 @@ export const defaultSiteCopy: SiteCopy = {
   whatsapp_footer_message_ar: "مرحبا QAMVIR أريد الاستفسار عن تصميم موقع",
   whatsapp_footer_message_en: "Hello QAMVIR, I'd like to inquire about building a website",
   whatsapp_contact_message_ar: "مرحبا أريد الاستفسار عن خدماتك",
-  whatsapp_contact_message_en: "Hello, I'd like to inquire about your services"
+  whatsapp_contact_message_en: "Hello, we'd like to inquire about your services"
 };
