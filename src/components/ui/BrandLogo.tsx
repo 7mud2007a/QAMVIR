@@ -44,7 +44,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
             {language === "ar" ? "QAMVIR" : "QAMVIR"}
           </span>
           <span className="text-[10px] tracking-widest text-neutral-500 dark:text-neutral-400 font-mono uppercase mt-1">
-            {language === "ar" ? "تصميم وتطوير ويب" : "Web Developer"}
+            {language === "ar" ? "تصميم وتطوير ويب" : "Web Development"}
           </span>
         </div>
       )}
