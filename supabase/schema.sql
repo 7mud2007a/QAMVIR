@@ -12,10 +12,10 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE TABLE IF NOT EXISTS public.site_settings (
   id TEXT PRIMARY KEY DEFAULT 'default',
   website_title TEXT NOT NULL DEFAULT 'QAMVIR | تصميم وتطوير مواقع الويب',
-  meta_description TEXT NOT NULL DEFAULT 'أصمم وأطور مواقع ويب عصرية، سريعة، ومخصصة لهوية مشروعك بالكامل.',
+  meta_description TEXT NOT NULL DEFAULT 'نصمم ونطور مواقع ويب عصرية وسريعة، مخصصة لهوية مشروعك بالكامل.',
   keywords TEXT DEFAULT 'تصميم مواقع, تطوير ويب, Next.js, Supabase, React, QAMVIR',
   og_title TEXT DEFAULT 'QAMVIR | تصميم وتطوير مواقع الويب',
-  og_description TEXT DEFAULT 'أصمم وأطور مواقع ويب عصرية، سريعة، ومخصصة لهوية مشروعك بالكامل.',
+  og_description TEXT DEFAULT 'نصمم ونطور مواقع ويب عصرية وسريعة، مخصصة لهوية مشروعك بالكامل.',
   og_image TEXT DEFAULT '',
   favicon_url TEXT DEFAULT '/favicon.ico',
   theme TEXT NOT NULL DEFAULT 'dark',
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS public.hero_content (
   title_highlight_en TEXT NOT NULL DEFAULT 'Modern Websites',
   title_suffix_ar TEXT NOT NULL DEFAULT 'وسريعة',
   title_suffix_en TEXT NOT NULL DEFAULT 'Tailored to Your Brand',
-  subtitle_ar TEXT NOT NULL DEFAULT 'أصمم وأطور مواقع ويب عصرية، سريعة، ومخصصة لهوية مشروعك بالكامل.',
+  subtitle_ar TEXT NOT NULL DEFAULT 'نصمم ونطور مواقع ويب عصرية وسريعة، مخصصة لهوية مشروعك بالكامل.',
   subtitle_en TEXT NOT NULL DEFAULT 'Designing and building modern, high-performance websites tailored to your brand.',
   cta_primary_ar TEXT NOT NULL DEFAULT 'تواصل عبر واتساب',
   cta_primary_en TEXT NOT NULL DEFAULT 'Contact via WhatsApp',
@@ -108,17 +108,17 @@ CREATE TABLE IF NOT EXISTS public.projects (
 -- 7. Contact Info
 CREATE TABLE IF NOT EXISTS public.contact_info (
   id TEXT PRIMARY KEY DEFAULT 'default',
-  badge_ar TEXT DEFAULT 'تواصل معي',
+  badge_ar TEXT DEFAULT 'تواصل معنا',
   badge_en TEXT DEFAULT 'GET IN TOUCH',
   title_ar TEXT DEFAULT 'دعنا نبدأ في تنفيذ موقعك',
   title_en TEXT DEFAULT 'Let''s Build Your Website',
-  subtitle_ar TEXT DEFAULT 'تواصل معي مباشرة عبر إحدى الوسائل التالية أو أرسل رسالتك هنا.',
+  subtitle_ar TEXT DEFAULT 'تواصل معنا مباشرة عبر إحدى الوسائل التالية أو أرسل رسالتك هنا.',
   subtitle_en TEXT DEFAULT 'Reach out directly via social channels or send a message below.',
   whatsapp_number TEXT NOT NULL DEFAULT '0930431817',
   telegram_username TEXT NOT NULL DEFAULT '@Dev7mud',
   instagram_username TEXT NOT NULL DEFAULT '@qamvir',
-  contact_text_ar TEXT DEFAULT 'أنا جاهز للاستماع لمشروعك والإجابة عن جميع استفساراتك.',
-  contact_text_en TEXT DEFAULT 'I am ready to hear about your project and answer all your questions.',
+  contact_text_ar TEXT DEFAULT 'يسعدنا الاستماع إلى تفاصيل مشروعك والإجابة عن جميع استفساراتك.',
+  contact_text_en TEXT DEFAULT 'We are ready to hear about your project and answer all your questions.',
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
@@ -183,10 +183,10 @@ INSERT INTO public.site_settings (id, website_title, meta_description, keywords,
 VALUES (
   'default',
   'QAMVIR | تصميم وتطوير مواقع الويب',
-  'أصمم وأطور مواقع ويب عصرية، سريعة، ومخصصة لهوية مشروعك بالكامل.',
+  'نصمم ونطور مواقع ويب عصرية وسريعة، مخصصة لهوية مشروعك بالكامل.',
   'تصميم مواقع, تطوير ويب, Next.js, Supabase, React, QAMVIR',
   'QAMVIR | تصميم وتطوير مواقع الويب',
-  'أصمم وأطور مواقع ويب عصرية، سريعة، ومخصصة لهوية مشروعك بالكامل.'
+  'نصمم ونطور مواقع ويب عصرية وسريعة، مخصصة لهوية مشروعك بالكامل.'
 )
 ON CONFLICT (id) DO NOTHING;
 
@@ -196,7 +196,7 @@ VALUES
   ('home', 'الرئيسية', 'Home', '#hero', true, 1),
   ('services', 'مميزات العمل', 'Features', '#services', true, 2),
   ('pricing', 'الباقات', 'Pricing', '#pricing', true, 3),
-  ('contact', 'تواصل معي', 'Contact', '#contact', true, 4)
+  ('contact', 'تواصل معنا', 'Contact', '#contact', true, 4)
 ON CONFLICT (id) DO NOTHING;
 
 -- Seed hero_content
@@ -211,7 +211,7 @@ VALUES (
   'تصميم وتطوير', 'Designing & Building',
   'مواقع ويب عصرية', 'Modern Websites',
   'وسريعة', 'Tailored to Your Brand',
-  'أصمم وأطور مواقع ويب عصرية، سريعة، ومخصصة لهوية مشروعك بالكامل.',
+  'نصمم ونطور مواقع ويب عصرية وسريعة، مخصصة لهوية مشروعك بالكامل.',
   'Designing and building modern, high-performance websites tailored to your brand.',
   'تواصل عبر واتساب', 'Contact via WhatsApp',
   'عرض الباقات', 'View Packages'
@@ -223,8 +223,8 @@ INSERT INTO public.about_content (id, title_ar, title_en, description_ar, descri
 VALUES (
   'default',
   'عن QAMVIR', 'About QAMVIR',
-  'مطور مواقع متكامل خبير بإنشاء واجهات المستخدم فائقة السلاسة والأنظمة الحديثة. أعمل بأحدث تقنيات الويب لبناء حضور رقمي قوي لعلامتك التجارية.',
-  'Full-stack web developer passionate about crafting seamless user experiences and modern digital platforms.',
+  'نطوّر مواقع ومنصات رقمية متكاملة، ونمتلك خبرة في بناء واجهات مستخدم سلسة وأنظمة حديثة. نعمل بأحدث تقنيات الويب لبناء حضور رقمي قوي لعلامتك التجارية.',
+  'We are passionate about crafting seamless user experiences and modern digital platforms.',
   '["Next.js 16", "React 19", "TypeScript", "Tailwind CSS", "Supabase", "Node.js", "Framer Motion"]'::jsonb
 )
 ON CONFLICT (id) DO NOTHING;
@@ -289,13 +289,13 @@ INSERT INTO public.contact_info (
 )
 VALUES (
   'default',
-  'تواصل معي', 'GET IN TOUCH',
+  'تواصل معنا', 'GET IN TOUCH',
   'دعنا نبدأ في تنفيذ موقعك', 'Let''s Build Your Website',
-  'تواصل معي مباشرة عبر إحدى الوسائل التالية أو أرسل رسالتك هنا.', 'Reach out directly via social channels or send a message below.',
+  'تواصل معنا مباشرة عبر إحدى الوسائل التالية أو أرسل رسالتك هنا.', 'Reach out directly via social channels or send a message below.',
   '0930431817',
   '@Dev7mud',
   '@qamvir',
-  'تواصل معي مباشرة لتنفيذ موقعك بأعلى جودة.',
+  'تواصل معنا مباشرة لتنفيذ موقعك بأعلى جودة.',
   'Reach out to get your high quality website created.'
 )
 ON CONFLICT (id) DO NOTHING;
@@ -316,7 +316,7 @@ CREATE POLICY "Allow public read site_content" ON public.site_content FOR SELECT
 CREATE POLICY "Allow authenticated full access site_content" ON public.site_content FOR ALL USING (auth.role() = 'authenticated');
 
 INSERT INTO public.site_content (id, content)
-VALUES ('default', '{"nav_cta_ar":"تواصل معي","nav_cta_en":"Contact Me","services_badge_ar":"مميزات العمل معي","services_badge_en":"WHAT YOU GET","services_title_ar":"ما الذي تحصل عليه عند العمل معي؟","services_title_en":"Key Features & Advantages","services_subtitle_ar":"خدمات متكاملة تضمن حصولك على موقع ويب احترافي يدعم نمو أعمالك.","services_subtitle_en":"Comprehensive web development services ensuring a professional site that grows your business.","pricing_badge_ar":"الأسعار والخدمات","pricing_badge_en":"PRICING & SERVICES","pricing_title_ar":"خيار احترافي متكامل لمشروعك","pricing_title_en":"Comprehensive Solution For Your Business","pricing_subtitle_ar":"خطة مخصصة تلبي كافة احتياجاتك البرمجية بوضوح وشفافية.","pricing_subtitle_en":"A complete custom plan designed to cover all your digital requirements.","pricing_card_title_ar":"موقع مخصص — مبني خصيصاً لاحتياجاتك","pricing_card_title_en":"Custom Website — Built For Your Needs","pricing_price_ar":"299$+","pricing_price_en":"$299+","pricing_note_ar":"يبدأ من 299$ — السعر النهائي يعتمد على حجم المشروع ومتطلباته.","pricing_note_en":"Starting from $299 — Final price depends on the project''s size and requirements.","pricing_cta_ar":"اطلب مشروعك الآن","pricing_cta_en":"Start Your Project","pricing_features_ar":["تصميم وتطوير موقع مخصص بالكامل","ربط كامل مع قاعدة البيانات","نظام تسجيل الدخول وإدارة المستخدمين","لوحة تحكم إدارية خاصة","نظام طلبات وحجوزات متكامل","نماذج اتصال واستفسارات العملاء","ربط وسائل التواصل (واتساب، تيليجرام، إنستغرام)","ربط واجهات البرمجية (APIs) والخدمات الخارجية","دمج أنظمة الدفع الإلكتروني عند الحاجة","تهيئة محركات البحث (SEO) وتسريع الأداء","تصميم متوافق بالكامل مع الهواتف والحواسب","رفع الموقع وربطه بالنطاق (Domain)"],"pricing_features_en":["Fully custom website design & development","Complete database integration","User registration & login","Admin dashboard","Orders & booking systems","Contact forms & customer inquiries","WhatsApp / Telegram / Instagram integration","API & third-party service integrations","Payment system integration when required","SEO & performance optimization","Fully responsive design for mobile, tablet and desktop","Website deployment & domain connection"],"contact_direct_ar":"وسائل التواصل المباشر","contact_direct_en":"Direct Contact Channels","contact_whatsapp_label_ar":"واتساب","contact_whatsapp_label_en":"WhatsApp","contact_telegram_label_ar":"تيليجرام","contact_telegram_label_en":"Telegram","contact_instagram_label_ar":"إنستغرام","contact_instagram_label_en":"Instagram","contact_form_success_title_ar":"شكراً لك!","contact_form_success_title_en":"Thank You!","contact_form_success_ar":"تم إرسال رسالتك بنجاح! سأتواصل معك في أقرب وقت ممكن.","contact_form_success_en":"Message sent successfully! I will respond promptly.","contact_name_label_ar":"الاسم الكامل","contact_name_label_en":"Full Name","contact_name_placeholder_ar":"اكتب اسمك هنا...","contact_name_placeholder_en":"Enter your name...","contact_email_label_ar":"البريد الإلكتروني","contact_email_label_en":"Email Address","contact_message_label_ar":"تفاصيل المشروع أو الاستفسار","contact_message_label_en":"Project Details or Inquiry","contact_message_placeholder_ar":"تحدث عن موقعك المطلوب، أهدافه، وأي تفاصيل أخرى...","contact_message_placeholder_en":"Describe your project goals, scope, and requirements...","contact_send_ar":"إرسال الرسالة","contact_send_en":"Send Message","footer_tagline_ar":"تصميم وتطوير مواقع ويب عصرية وسريعة مخصصة لعلامتك التجارية.","footer_tagline_en":"Designing and building modern, high-performance websites tailored to your brand.","footer_rights_ar":"جميع الحقوق محفوظة © 2026 QAMVIR","footer_rights_en":"All rights reserved © 2026 QAMVIR","footer_scroll_top_ar":"للأعلى","footer_scroll_top_en":"Back to Top","whatsapp_hero_message_ar":"مرحبا أريد الاستفسار عن تصميم موقع","whatsapp_hero_message_en":"Hello, I''d like to inquire about building a website","whatsapp_pricing_message_ar":"مرحبا أريد الاستفسار عن خدمة تصميم وتطوير المواقع","whatsapp_pricing_message_en":"Hello, I''d like to inquire about website development services","whatsapp_footer_message_ar":"مرحبا QAMVIR أريد الاستفسار عن تصميم موقع","whatsapp_footer_message_en":"Hello QAMVIR, I''d like to inquire about building a website","whatsapp_contact_message_ar":"مرحبا أريد الاستفسار عن خدماتك","whatsapp_contact_message_en":"Hello, I''d like to inquire about your services"}'::jsonb)
+VALUES ('default', '{"nav_cta_ar":"تواصل معنا","nav_cta_en":"Contact Me","services_badge_ar":"مميزات العمل معنا","services_badge_en":"WHAT YOU GET","services_title_ar":"ما الذي تحصل عليه عند العمل معنا؟","services_title_en":"Key Features & Advantages","services_subtitle_ar":"خدمات متكاملة تضمن حصولك على موقع ويب احترافي يدعم نمو أعمالك.","services_subtitle_en":"Comprehensive web development services ensuring a professional site that grows your business.","pricing_badge_ar":"الأسعار والخدمات","pricing_badge_en":"PRICING & SERVICES","pricing_title_ar":"خيار احترافي متكامل لمشروعك","pricing_title_en":"Comprehensive Solution For Your Business","pricing_subtitle_ar":"خطة مخصصة تلبي كافة احتياجاتك البرمجية بوضوح وشفافية.","pricing_subtitle_en":"A complete custom plan designed to cover all your digital requirements.","pricing_card_title_ar":"موقع مخصص — مبني خصيصاً لاحتياجاتك","pricing_card_title_en":"Custom Website — Built For Your Needs","pricing_price_ar":"299$+","pricing_price_en":"$299+","pricing_note_ar":"يبدأ من 299$ — السعر النهائي يعتمد على حجم المشروع ومتطلباته.","pricing_note_en":"Starting from $299 — Final price depends on the project''s size and requirements.","pricing_cta_ar":"اطلب مشروعك الآن","pricing_cta_en":"Start Your Project","pricing_features_ar":["تصميم وتطوير موقع مخصص بالكامل","ربط كامل مع قاعدة البيانات","نظام تسجيل الدخول وإدارة المستخدمين","لوحة تحكم إدارية خاصة","نظام طلبات وحجوزات متكامل","نماذج اتصال واستفسارات العملاء","ربط وسائل التواصل (واتساب، تيليجرام، إنستغرام)","ربط واجهات البرمجية (APIs) والخدمات الخارجية","دمج أنظمة الدفع الإلكتروني عند الحاجة","تهيئة محركات البحث (SEO) وتسريع الأداء","تصميم متوافق بالكامل مع الهواتف والحواسب","رفع الموقع وربطه بالنطاق (Domain)"],"pricing_features_en":["Fully custom website design & development","Complete database integration","User registration & login","Admin dashboard","Orders & booking systems","Contact forms & customer inquiries","WhatsApp / Telegram / Instagram integration","API & third-party service integrations","Payment system integration when required","SEO & performance optimization","Fully responsive design for mobile, tablet and desktop","Website deployment & domain connection"],"contact_direct_ar":"وسائل التواصل المباشر","contact_direct_en":"Direct Contact Channels","contact_whatsapp_label_ar":"واتساب","contact_whatsapp_label_en":"WhatsApp","contact_telegram_label_ar":"تيليجرام","contact_telegram_label_en":"Telegram","contact_instagram_label_ar":"إنستغرام","contact_instagram_label_en":"Instagram","contact_form_success_title_ar":"شكراً لك!","contact_form_success_title_en":"Thank You!","contact_form_success_ar":"تم إرسال رسالتك بنجاح! سنتواصل معك في أقرب وقت ممكن.","contact_form_success_en":"Message sent successfully! We will respond promptly.","contact_name_label_ar":"الاسم الكامل","contact_name_label_en":"Full Name","contact_name_placeholder_ar":"اكتب اسمك هنا...","contact_name_placeholder_en":"Enter your name...","contact_email_label_ar":"البريد الإلكتروني","contact_email_label_en":"Email Address","contact_message_label_ar":"تفاصيل المشروع أو الاستفسار","contact_message_label_en":"Project Details or Inquiry","contact_message_placeholder_ar":"تحدث عن موقعك المطلوب، أهدافه، وأي تفاصيل أخرى...","contact_message_placeholder_en":"Describe your project goals, scope, and requirements...","contact_send_ar":"إرسال الرسالة","contact_send_en":"Send Message","footer_tagline_ar":"تصميم وتطوير مواقع ويب عصرية وسريعة مخصصة لعلامتك التجارية.","footer_tagline_en":"Designing and building modern, high-performance websites tailored to your brand.","footer_rights_ar":"جميع الحقوق محفوظة © 2026 QAMVIR","footer_rights_en":"All rights reserved © 2026 QAMVIR","footer_scroll_top_ar":"للأعلى","footer_scroll_top_en":"Back to Top","whatsapp_hero_message_ar":"مرحبا أريد الاستفسار عن تصميم موقع","whatsapp_hero_message_en":"Hello, I''d like to inquire about building a website","whatsapp_pricing_message_ar":"مرحبا أريد الاستفسار عن خدمة تصميم وتطوير المواقع","whatsapp_pricing_message_en":"Hello, I''d like to inquire about website development services","whatsapp_footer_message_ar":"مرحبا QAMVIR أريد الاستفسار عن تصميم موقع","whatsapp_footer_message_en":"Hello QAMVIR, I''d like to inquire about building a website","whatsapp_contact_message_ar":"مرحبا أريد الاستفسار عن خدماتك","whatsapp_contact_message_en":"Hello, I''d like to inquire about your services"}'::jsonb)
 ON CONFLICT (id) DO NOTHING;
 
 
