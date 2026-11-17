@@ -67,8 +67,8 @@ export const Navbar: React.FC = () => {
       const buttonBg = button.querySelector(".qamvir-menu-bg");
       const items = nav.querySelectorAll("li");
 
-      gsap.set(lineIcon, { opacity: 1, yPercent: 0 });
-      gsap.set(closeIcon, { opacity: 0, yPercent: 125 });
+      gsap.set(lineIcon, { opacity: 1, rotation: 0, scale: 1, transformOrigin: "50% 50%" });
+      gsap.set(closeIcon, { opacity: 0, rotation: -90, scale: 0.7, transformOrigin: "50% 50%" });
 
       open
         .set(button, { pointerEvents: "none" })
@@ -90,18 +90,20 @@ export const Navbar: React.FC = () => {
           stagger: 0.1,
           ease: "elastic.out(1.15, .95)",
         }, 0)
-        .to(closeIcon, {
-          opacity: 1,
-          yPercent: -125,
-          duration: 1,
-          ease: "power4.out",
-        }, 0)
         .to(lineIcon, {
           opacity: 0,
-          yPercent: -125,
-          duration: 1,
-          ease: "power4.out",
+          rotation: 35,
+          scale: 0.75,
+          duration: 0.38,
+          ease: "power2.inOut",
         }, 0)
+        .to(closeIcon, {
+          opacity: 1,
+          rotation: 0,
+          scale: 1,
+          duration: 0.42,
+          ease: "power2.inOut",
+        }, 0.04)
         .set(button, { pointerEvents: "all" });
 
       close
@@ -136,16 +138,18 @@ export const Navbar: React.FC = () => {
         }, "-=.5")
         .to(closeIcon, {
           opacity: 0,
-          yPercent: 125,
-          duration: 1,
-          ease: "power4.out",
+          rotation: 90,
+          scale: 0.7,
+          duration: 0.38,
+          ease: "power2.inOut",
         }, 0)
         .to(lineIcon, {
           opacity: 1,
-          yPercent: 0,
-          duration: 1,
-          ease: "power4.out",
-        }, 0)
+          rotation: 0,
+          scale: 1,
+          duration: 0.42,
+          ease: "power2.inOut",
+        }, 0.04)
         .set(button, { pointerEvents: "all" });
 
       openTl.current = open;
@@ -296,16 +300,16 @@ export const Navbar: React.FC = () => {
             >
               <span className="qamvir-menu-bg absolute inset-0 rounded-[25%] bg-black shadow-[0_8px_25px_rgba(0,0,0,0.4)]" />
               <span className="sr-only">{mobileMenuOpen ? "Close menu" : "Open menu"}</span>
-              <span className="relative z-10 h-5 w-5 overflow-hidden" aria-hidden="true">
+              <span className="relative z-10 h-6 w-6 overflow-hidden" aria-hidden="true">
                 <svg
                   viewBox="0 0 448 512"
-                  className="qamvir-menu-line absolute left-1/2 top-1/2 h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 fill-white"
+                  className="qamvir-menu-line absolute left-1/2 top-1/2 h-3/4 w-3/4 -translate-x-1/2 -translate-y-1/2 fill-white"
                 >
                   <path d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z" />
                 </svg>
                 <svg
                   viewBox="0 0 320 512"
-                  className="qamvir-menu-close absolute left-1/2 top-1/2 h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 fill-white"
+                  className="qamvir-menu-close absolute left-1/2 top-1/2 h-3/4 w-3/4 -translate-x-1/2 -translate-y-1/2 fill-white"
                 >
                   <path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z" />
                 </svg>
