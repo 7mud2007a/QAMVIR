@@ -227,7 +227,7 @@ export const Navbar: React.FC = () => {
     }));
 
   const menuItems = [
-    ...visibleNavItems,
+    ...visibleNavItems.filter((item) => item.href !== "#contact"),
     { label: language === "ar" ? "تواصل معي" : "Contact", href: "#contact" },
   ];
 
