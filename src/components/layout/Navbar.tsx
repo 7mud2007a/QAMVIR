@@ -100,6 +100,7 @@ export const Navbar: React.FC = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-[100] px-4 sm:px-8 py-4 transition-all duration-300">
+      <style>{'@import url("https://fonts.googleapis.com/css2?family=Krona+One&display=swap");'}</style>
       <div
         className={`max-w-7xl mx-auto rounded-2xl transition-all duration-300 px-4 sm:px-6 py-3 flex items-center justify-between border ${
           scrolled
@@ -158,7 +159,6 @@ export const Navbar: React.FC = () => {
             aria-label={mobileMenuOpen ? "Close Navigation Menu" : "Open Navigation Menu"}
             aria-expanded={mobileMenuOpen}
             aria-controls="qamvir-mobile-navigation"
-            whileTap={{ scale: 0.96 }}
           >
             <motion.span
               className="absolute inset-0 rounded-[25%] bg-black shadow-[0_8px_25px_rgba(0,0,0,0.4)] dark:bg-white"
@@ -220,7 +220,7 @@ export const Navbar: React.FC = () => {
                         href={item.href}
                         className="relative inline-block font-bold uppercase tracking-[-0.02em] text-white/35 no-underline transition-all duration-300 group-hover:translate-x-1 group-hover:tracking-[0.02em] group-hover:text-white group-hover:[text-shadow:0_0_20px_rgba(255,255,255,0.4)] dark:text-black/35 dark:group-hover:text-black dark:group-hover:[text-shadow:0_0_20px_rgba(0,0,0,0.35)]"
                         style={{
-                          fontFamily: "Arial, Helvetica, sans-serif",
+                          fontFamily: "'Krona One', sans-serif",
                           fontSize: "clamp(1.8rem, 6vw, 4.5rem)",
                         }}
                       >
