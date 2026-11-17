@@ -207,21 +207,14 @@ export const Navbar: React.FC = () => {
                       exit={{ x: language === "ar" ? 40 : -40, opacity: 0 }}
                       whileHover={{
                         scale: 1.075,
-                        color: "#ffffff",
-                        textShadow:
-                          "0 0 7px rgba(255,255,255,0.85), 0 0 18px rgba(255,255,255,0.65), 0 0 34px rgba(255,255,255,0.4)",
+                        transition: { duration: 0.24, ease: "easeOut" },
                       }}
                       whileTap={{ scale: 0.98 }}
                       transition={{
-                        duration: 0.55,
-                        delay: 0.18 + index * 0.09,
-                        ease: [0.16, 1, 0.3, 1],
+                        x: { duration: 0.55, delay: 0.18 + index * 0.09, ease: [0.16, 1, 0.3, 1] },
+                        opacity: { duration: 0.55, delay: 0.18 + index * 0.09 },
                       }}
-                      className="block origin-left rounded-xl px-3 py-4 text-[clamp(1.8rem,6vw,4.5rem)] font-bold text-neutral-950 dark:text-white"
-                      style={{
-                        textShadow: "0 0 0 rgba(255,255,255,0)",
-                        transition: "text-shadow 220ms ease",
-                      }}
+                      className="block origin-left rounded-xl px-3 py-4 text-[clamp(1.8rem,6vw,4.5rem)] font-bold text-neutral-950 transition-all duration-200 hover:text-black hover:[text-shadow:0_0_7px_rgba(0,0,0,0.55),0_0_18px_rgba(0,0,0,0.3)] dark:text-white dark:hover:text-white dark:hover:[text-shadow:0_0_7px_rgba(255,255,255,0.85),0_0_18px_rgba(255,255,255,0.65),0_0_34px_rgba(255,255,255,0.4)]"}
                     >
                       {item.label}
                     </motion.a>
