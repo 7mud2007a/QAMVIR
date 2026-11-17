@@ -232,8 +232,8 @@ export const Navbar: React.FC = () => {
       label:
         index === 2
           ? language === "ar"
-            ? "أعمالي"
-            : "My Work"
+            ? "أعمالنا"
+            : "Our Work"
           : language === "ar"
             ? item.label_ar
             : item.label_en,
@@ -242,7 +242,7 @@ export const Navbar: React.FC = () => {
 
   const menuItems = [
     ...visibleNavItems.filter((item) => item.href !== "#contact"),
-    { label: language === "ar" ? "تواصل معي" : "Contact", href: "#contact" },
+    { label: language === "ar" ? "تواصل معنا" : "Contact", href: "#contact" },
   ];
 
   return (
