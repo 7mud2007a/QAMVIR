@@ -17,33 +17,22 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
   return (
     <div className="flex items-center gap-3 select-none group cursor-pointer">
       <div className={`relative flex items-center justify-center ${className}`}>
-        {/* Custom Q/VK monogram recreated as a transparent SVG */}
+        {/* Logo traced from the supplied artwork; transparent background */}
         <svg
-          viewBox="0 0 640 540"
+          viewBox="0 0 606 526"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="relative w-full h-full drop-shadow-sm transition-transform duration-300 group-hover:scale-105"
-          aria-label="QAMVIR logo"
+          className="relative w-full h-full drop-shadow-sm transition-transform duration-300 group-hover:scale-105 text-neutral-900 dark:text-white"
           role="img"
+          aria-label="QAMVIR logo"
         >
-          {/* Circular Q-shaped outer mark with a transparent center */}
           <path
+            d="M604 19 L513 20 L332 401 L322 411 L307 405 L180 130 L167 137 L143 165 L129 193 L127 212 L275 526 L356 526 L387 463 L397 457 L412 468 L459 526 L564 525 L437 372 L436 363 Z"
             fill="currentColor"
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M270 10C390 10 468 84 468 184L420 270C416 177 352 108 272 108C188 108 132 174 132 260C132 328 169 385 232 416L270 493C130 462 38 368 38 258C38 118 136 10 270 10ZM270 66C169 66 88 145 88 258C88 326 119 383 171 420C126 379 105 326 105 260C105 158 174 88 272 88C342 88 402 130 433 191C425 118 360 66 270 66Z"
           />
-          {/* Angular central stroke */}
           <path
+            d="M275 2 L219 0 L184 5 L142 18 L93 46 L56 81 L32 115 L14 154 L2 203 L0 248 L8 297 L23 339 L42 372 L81 415 L108 435 L147 455 L193 468 L212 469 L168 374 L136 349 L116 326 L100 295 L91 263 L92 204 L117 144 L149 110 L188 88 L231 78 L279 85 L317 103 L352 136 L377 181 L384 214 L436 107 L415 76 L363 33 L326 15 Z"
             fill="currentColor"
-            d="M210 139L263 111L391 416L352 500H300L158 205L210 139ZM207 181L190 207L318 468H337L359 420L248 156L207 181Z"
-            fillRule="evenodd"
-            clipRule="evenodd"
-          />
-          {/* Rising diagonal and lower right arm */}
-          <path
-            fill="currentColor"
-            d="M506 20H616L463 325L610 500H500L388 374L424 302L510 405L414 322L506 20Z"
           />
         </svg>
       </div>
