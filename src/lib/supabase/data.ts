@@ -128,7 +128,7 @@ export const defaultNavigation: NavigationItem[] = [
 
 export const defaultHeroContent: HeroContent = {
   id: "default",
-  status_badge_ar: "متفرغ للمشاريع الجديدة",
+  status_badge_ar: "متاحون للمشاريع الجديدة",
   status_badge_en: "Available for new projects",
   title_prefix_ar: "تصميم وتطوير",
   title_prefix_en: "Designing & Building",
