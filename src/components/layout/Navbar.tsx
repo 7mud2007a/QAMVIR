@@ -6,7 +6,7 @@ import { useApp } from "@/context/AppContext";
 import { BrandLogo } from "@/components/ui/BrandLogo";
 import { ShimmerButton } from "@/components/ui/ShimmerButton";
 import { Globe, ArrowUpRight } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, type Variants } from "framer-motion";
 
 export const Navbar: React.FC = () => {
   const { language, toggleLanguage, navigation, siteCopy } = useApp();
@@ -65,7 +65,7 @@ export const Navbar: React.FC = () => {
     { label: language === "ar" ? "تواصل معي" : "Contact", href: "#contact" },
   ];
 
-  const menuVariants = {
+  const menuVariants: Variants = {
     closed: {
       clipPath: `circle(0px at ${menuOrigin.x}px ${menuOrigin.y}px)`,
       transition: { duration: 1.2, ease: [0.76, 0, 0.24, 1] },
@@ -76,7 +76,7 @@ export const Navbar: React.FC = () => {
     },
   };
 
-  const listVariants = {
+  const listVariants: Variants = {
     closed: {
       transition: { staggerChildren: 0.1, staggerDirection: -1 },
     },
@@ -85,7 +85,7 @@ export const Navbar: React.FC = () => {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     closed: {
       x: language === "ar" ? 200 : -200,
       opacity: 0,
