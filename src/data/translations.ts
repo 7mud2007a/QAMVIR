@@ -53,7 +53,7 @@ export const translations = {
     contact: {
       badge: "تواصل معنا",
       title: "دعنا نبدأ في تنفيذ موقعك",
-      subtitle: "تواصل معنا مباشرة عبر إحدى الوسائل التالية أو أرسل رسالتك هنا.",
+      subtitle: "تواصل معنا مباشرة عبر إحدى الوسائل التالية.",
       nameLabel: "الاسم الكامل",
       namePlaceholder: "اكتب اسمك هنا...",
       emailLabel: "البريد الإلكتروني",
@@ -130,7 +130,7 @@ export const translations = {
     contact: {
       badge: "GET IN TOUCH",
       title: "Let's Build Your Website",
-      subtitle: "Reach out directly via social channels or send a message below.",
+      subtitle: "Contact us directly through one of the following channels.",
       nameLabel: "Full Name",
       namePlaceholder: "Enter your name...",
       emailLabel: "Email Address",
