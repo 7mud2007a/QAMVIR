@@ -105,10 +105,10 @@ export interface ContactInfo {
 // Default Fallbacks
 export const defaultSiteSettings: SiteSettings = {
   id: "default",
-  website_title: "حمود — 7mud | تصميم وتطوير مواقع الويب",
+  website_title: "QAMVIR — QAMVIR | تصميم وتطوير مواقع الويب",
   meta_description: "أصمم وأطور مواقع ويب عصرية، سريعة، ومخصصة لهوية مشروعك بالكامل.",
-  keywords: "تصميم مواقع, تطوير ويب, Next.js, Supabase, React, حمود",
-  og_title: "حمود — 7mud | تصميم وتطوير مواقع الويب",
+  keywords: "تصميم مواقع, تطوير ويب, Next.js, Supabase, React, QAMVIR",
+  og_title: "QAMVIR — QAMVIR | تصميم وتطوير مواقع الويب",
   og_description: "أصمم وأطور مواقع ويب عصرية، سريعة، ومخصصة لهوية مشروعك بالكامل.",
   og_image: "",
   favicon_url: "/favicon.ico",
@@ -147,8 +147,8 @@ export const defaultHeroContent: HeroContent = {
 
 export const defaultAboutContent: AboutContent = {
   id: "default",
-  title_ar: "عن حمود (7mud)",
-  title_en: "About 7mud",
+  title_ar: "عن QAMVIR (QAMVIR)",
+  title_en: "About QAMVIR",
   description_ar: "مطور مواقع متكامل خبير بإنشاء واجهات المستخدم فائقة السلاسة والأنظمة الحديثة. أعمل بأحدث تقنيات الويب لبناء حضور رقمي قوي لعلامتك التجارية.",
   description_en: "Full-stack web developer passionate about crafting seamless user experiences and modern digital platforms.",
   skills: ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS", "Supabase", "Node.js", "Framer Motion"],
