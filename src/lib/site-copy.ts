@@ -65,7 +65,7 @@ export interface SiteCopy {
 
 export const defaultSiteCopy: SiteCopy = {
   nav_cta_ar: "تواصل معنا",
-  nav_cta_en: "Contact Me",
+  nav_cta_en: "Contact Us",
   services_badge_ar: "مميزات العمل معنا",
   services_badge_en: "WHAT YOU GET",
   services_title_ar: "ما الذي تحصل عليه عند العمل معنا؟",
