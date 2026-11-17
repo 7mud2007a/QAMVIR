@@ -50,10 +50,10 @@ export const ProjectsSection: React.FC = () => {
             {isAr ? "معرض الأعمال" : "PORTFOLIO"}
           </span>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-neutral-950 dark:text-white mt-4 mb-4">
-            {isAr ? "أعمالي" : "My Projects"}
+            {isAr ? "أعمالنا" : "Our Projects"}
           </h2>
           <p className="text-neutral-600 dark:text-neutral-400 text-base sm:text-lg">
-            {isAr ? "تصفّح بعض المواقع التي صممتها وطورتها — اضغط على أي مشروع لزيارته" : "Explore a few websites I've designed and built — select a project to visit it"}
+            {isAr ? "تصفّح بعض المواقع التي صممناها وطوّرناها — اضغط على أي مشروع لزيارته" : "Explore a few websites we've designed and built — select a project to visit"}
           </p>
         </div>
 
