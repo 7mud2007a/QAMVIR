@@ -10,7 +10,7 @@ export const Footer: React.FC = () => {
   const isAr = language === "ar";
   const t = {
     tagline: isAr ? siteCopy.footer_tagline_ar : siteCopy.footer_tagline_en,
-    rights: isAr ? siteCopy.footer_rights_ar : siteCopy.footer_rights_en,
+    rights: isAr ? "جميع الحقوق محفوظة © 2026 QAMVIR" : "All rights reserved © 2026 QAMVIR",
     scrollTop: isAr ? siteCopy.footer_scroll_top_ar : siteCopy.footer_scroll_top_en,
   };
 
