@@ -106,10 +106,10 @@ export interface ContactInfo {
 export const defaultSiteSettings: SiteSettings = {
   id: "default",
   website_title: "QAMVIR | تصميم وتطوير مواقع الويب",
-  meta_description: "أصمم وأطور مواقع ويب عصرية، سريعة، ومخصصة لهوية مشروعك بالكامل.",
+  meta_description: "نصمم ونطور مواقع ويب عصرية وسريعة، مخصصة لهوية مشروعك بالكامل.",
   keywords: "تصميم مواقع, تطوير ويب, Next.js, Supabase, React, QAMVIR",
   og_title: "QAMVIR | تصميم وتطوير مواقع الويب",
-  og_description: "أصمم وأطور مواقع ويب عصرية، سريعة، ومخصصة لهوية مشروعك بالكامل.",
+  og_description: "نصمم ونطور مواقع ويب عصرية وسريعة، مخصصة لهوية مشروعك بالكامل.",
   og_image: "",
   favicon_url: "/favicon.ico",
   theme: "dark",
@@ -123,7 +123,7 @@ export const defaultNavigation: NavigationItem[] = [
   { id: "home", label_ar: "الرئيسية", label_en: "Home", href: "#hero", enabled: true, display_order: 1 },
   { id: "services", label_ar: "مميزات العمل", label_en: "Features", href: "#services", enabled: true, display_order: 2 },
   { id: "pricing", label_ar: "الباقات", label_en: "Pricing", href: "#pricing", enabled: true, display_order: 3 },
-  { id: "contact", label_ar: "تواصل معي", label_en: "Contact", href: "#contact", enabled: true, display_order: 4 },
+  { id: "contact", label_ar: "تواصل معنا", label_en: "Contact", href: "#contact", enabled: true, display_order: 4 },
 ];
 
 export const defaultHeroContent: HeroContent = {
@@ -136,7 +136,7 @@ export const defaultHeroContent: HeroContent = {
   title_highlight_en: "Modern Websites",
   title_suffix_ar: "وسريعة",
   title_suffix_en: "Tailored to Your Brand",
-  subtitle_ar: "أصمم وأطور مواقع ويب عصرية، سريعة، ومخصصة لهوية مشروعك بالكامل.",
+  subtitle_ar: "نصمم ونطور مواقع ويب عصرية وسريعة، مخصصة لهوية مشروعك بالكامل.",
   subtitle_en: "Designing and building modern, high-performance websites tailored to your brand.",
   cta_primary_ar: "تواصل عبر واتساب",
   cta_primary_en: "Contact via WhatsApp",
@@ -149,8 +149,8 @@ export const defaultAboutContent: AboutContent = {
   id: "default",
   title_ar: "عن QAMVIR",
   title_en: "About QAMVIR",
-  description_ar: "مطور مواقع متكامل خبير بإنشاء واجهات المستخدم فائقة السلاسة والأنظمة الحديثة. أعمل بأحدث تقنيات الويب لبناء حضور رقمي قوي لعلامتك التجارية.",
-  description_en: "Full-stack web developer passionate about crafting seamless user experiences and modern digital platforms.",
+  description_ar: "نطوّر مواقع ومنصات رقمية متكاملة، ونمتلك خبرة في بناء واجهات مستخدم سلسة وأنظمة حديثة. نعمل بأحدث تقنيات الويب لبناء حضور رقمي قوي لعلامتك التجارية.",
+  description_en: "We are passionate about crafting seamless user experiences and modern digital platforms.",
   skills: ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS", "Supabase", "Node.js", "Framer Motion"],
   other_content_ar: "",
   other_content_en: "",
@@ -243,17 +243,17 @@ export const defaultProjects: ProjectItem[] = [];
 
 export const defaultContactInfo: ContactInfo = {
   id: "default",
-  badge_ar: "تواصل معي",
+  badge_ar: "تواصل معنا",
   badge_en: "GET IN TOUCH",
   title_ar: "دعنا نبدأ في تنفيذ موقعك",
   title_en: "Let's Build Your Website",
-  subtitle_ar: "تواصل معي مباشرة عبر إحدى الوسائل التالية أو أرسل رسالتك هنا.",
+  subtitle_ar: "تواصل معنا مباشرة عبر إحدى الوسائل التالية أو أرسل رسالتك هنا.",
   subtitle_en: "Reach out directly via social channels or send a message below.",
   whatsapp_number: "0930431817",
   telegram_username: "@Dev7mud",
   instagram_username: "@qamvir",
-  contact_text_ar: "تواصل معي مباشرة لتنفيذ موقعك بأعلى جودة.",
-  contact_text_en: "Reach out to get your high quality website created.",
+  contact_text_ar: "تواصل معنا مباشرة لتنفيذ موقعك بأعلى جودة.",
+  contact_text_en: "Reach out to us to get your high-quality website created.",
 };
 
 // Data Fetching Functions
