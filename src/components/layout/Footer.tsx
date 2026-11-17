@@ -52,7 +52,7 @@ export const Footer: React.FC = () => {
               {navigation.find((x) => x.id === "pricing")?.[isAr ? "label_ar" : "label_en"] || (isAr ? "الباقات" : "Pricing")}
             </a>
             <a href="#contact" className="hover:text-neutral-950 dark:hover:text-white transition-colors">
-              {navigation.find((x) => x.id === "contact")?.[isAr ? "label_ar" : "label_en"] || (isAr ? "تواصل معي" : "Contact")}
+              {navigation.find((x) => x.id === "contact")?.[isAr ? "label_ar" : "label_en"] || (isAr ? "تواصل معنا" : "Contact")}
             </a>
           </div>
 
