@@ -20,8 +20,6 @@ export const Navbar: React.FC = () => {
       setMobileMenuOpen(false);
       return;
     }
-
-    // Capture the button's viewport center once; both reveal and collapse use it.
     const rect = menuButtonRef.current?.getBoundingClientRect();
     if (rect) {
       setMenuOrigin({
@@ -62,6 +60,43 @@ export const Navbar: React.FC = () => {
     }));
 
   const closeMenu = () => setMobileMenuOpen(false);
+  const menuItems = [
+    ...visibleNavItems,
+    { label: language === "ar" ? "تواصل معي" : "Contact", href: "#contact" },
+  ];
+
+  const menuVariants = {
+    closed: {
+      clipPath: `circle(0px at ${menuOrigin.x}px ${menuOrigin.y}px)`,
+      transition: { duration: 1.2, ease: [0.76, 0, 0.24, 1] },
+    },
+    open: {
+      clipPath: `circle(200% at ${menuOrigin.x}px ${menuOrigin.y}px)`,
+      transition: { duration: 1.5, ease: [0.22, 1, 0.36, 1] },
+    },
+  };
+
+  const listVariants = {
+    closed: {
+      transition: { staggerChildren: 0.1, staggerDirection: -1 },
+    },
+    open: {
+      transition: { delayChildren: 0.05, staggerChildren: 0.1 },
+    },
+  };
+
+  const itemVariants = {
+    closed: {
+      x: language === "ar" ? 200 : -200,
+      opacity: 0,
+      transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
+    },
+    open: {
+      x: 0,
+      opacity: 1,
+      transition: { duration: 1.15, ease: [0.34, 1.56, 0.64, 1] },
+    },
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-[100] px-4 sm:px-8 py-4 transition-all duration-300">
@@ -97,7 +132,6 @@ export const Navbar: React.FC = () => {
             <Globe className="w-3.5 h-3.5" />
             <span>{language === "ar" ? "English" : "العربية"}</span>
           </button>
-
           <a href="#contact">
             <ShimmerButton
               variant="primary"
@@ -109,7 +143,6 @@ export const Navbar: React.FC = () => {
           </a>
         </div>
 
-        {/* The hamburger stays in its original header position. */}
         <div className="flex sm:hidden items-center gap-2">
           <button
             onClick={toggleLanguage}
@@ -118,45 +151,44 @@ export const Navbar: React.FC = () => {
             {language === "ar" ? "EN" : "عربي"}
           </button>
 
-          <button
+          <motion.button
             ref={menuButtonRef}
             onClick={toggleMobileMenu}
-            className="relative z-[102] flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-neutral-300 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 shadow-sm transition-colors"
+            className="relative z-[102] flex h-10 w-10 shrink-0 items-center justify-center rounded-[20px] border-0 bg-transparent text-white outline-none"
             aria-label={mobileMenuOpen ? "Close Navigation Menu" : "Open Navigation Menu"}
             aria-expanded={mobileMenuOpen}
             aria-controls="qamvir-mobile-navigation"
+            whileTap={{ scale: 0.96 }}
           >
+            <motion.span
+              className="absolute inset-0 rounded-[25%] bg-black shadow-[0_8px_25px_rgba(0,0,0,0.4)] dark:bg-white"
+              animate={
+                mobileMenuOpen
+                  ? { scale: [1, 0.9, 1] }
+                  : { scale: 1 }
+              }
+              transition={{ duration: 0.5, times: [0, 0.5, 1], ease: "easeOut" }}
+            />
             <span className="sr-only">{mobileMenuOpen ? "Close menu" : "Open menu"}</span>
-            <span className="relative flex h-5 w-5 items-center justify-center" aria-hidden="true">
-              <motion.span
-                className="absolute h-[2px] w-5 rounded-full bg-current"
-                initial={false}
-                animate={{
-                  y: mobileMenuOpen ? 0 : -6,
-                  rotate: mobileMenuOpen ? 45 : 0,
-                }}
-                transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
-              />
-              <motion.span
-                className="absolute h-[2px] w-5 rounded-full bg-current"
-                initial={false}
-                animate={{
-                  opacity: mobileMenuOpen ? 0 : 1,
-                  scaleX: mobileMenuOpen ? 0.35 : 1,
-                }}
-                transition={{ duration: 0.2, ease: "easeInOut" }}
-              />
-              <motion.span
-                className="absolute h-[2px] w-5 rounded-full bg-current"
-                initial={false}
-                animate={{
-                  y: mobileMenuOpen ? 0 : 6,
-                  rotate: mobileMenuOpen ? -45 : 0,
-                }}
-                transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
-              />
+            <span className="relative z-10 h-5 w-5 overflow-hidden" aria-hidden="true">
+              <motion.svg
+                viewBox="0 0 448 512"
+                className="absolute left-1/2 top-1/2 h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 fill-white dark:fill-black"
+                animate={{ y: mobileMenuOpen ? "-125%" : "-50%", opacity: mobileMenuOpen ? 0 : 1 }}
+                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <path d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z" />
+              </motion.svg>
+              <motion.svg
+                viewBox="0 0 320 512"
+                className="absolute left-1/2 top-1/2 h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 fill-white dark:fill-black"
+                animate={{ y: mobileMenuOpen ? "-50%" : "125%", opacity: mobileMenuOpen ? 1 : 0 }}
+                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <path d="M310.6 361.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L160 301.3 54.7 406.7c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L114.7 256 9.4 150.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 210.7l105.3-105.4c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3L205.3 256l105.3 105.4z" />
+              </motion.svg>
             </span>
-          </button>
+          </motion.button>
         </div>
       </div>
 
@@ -166,77 +198,38 @@ export const Navbar: React.FC = () => {
             {mobileMenuOpen && (
               <motion.div
                 id="qamvir-mobile-navigation"
-                className="sm:hidden fixed inset-0 z-[99] flex min-h-[100svh] flex-col overflow-y-auto bg-white text-neutral-950 dark:bg-black dark:text-white"
-                style={{
-                  clipPath: `circle(0px at ${menuOrigin.x}px ${menuOrigin.y}px)`,
-                }}
-                initial={{
-                  clipPath: `circle(0px at ${menuOrigin.x}px ${menuOrigin.y}px)`,
-                }}
-                animate={{
-                  clipPath: `circle(160vmax at ${menuOrigin.x}px ${menuOrigin.y}px)`,
-                }}
-                exit={{
-                  // Collapse back to the exact same hamburger center, not a corner.
-                  clipPath: `circle(0px at ${menuOrigin.x}px ${menuOrigin.y}px)`,
-                }}
-                transition={{
-                  clipPath: {
-                    duration: 1.15,
-                    ease: [0.76, 0, 0.24, 1],
-                  },
-                }}
+                className="fixed inset-0 z-[99] flex h-[100dvh] w-full items-center overflow-hidden bg-black text-white dark:bg-white dark:text-black"
+                dir={language === "ar" ? "rtl" : "ltr"}
+                variants={menuVariants}
+                initial="closed"
+                animate="open"
+                exit="closed"
               >
-                <div className="flex min-h-20 items-center justify-between px-6 pt-4">
-                  <span className="text-xs font-semibold uppercase tracking-[0.28em] text-neutral-500 dark:text-neutral-400">
-                    {language === "ar" ? "القائمة" : "Menu"}
-                  </span>
-                  <span className="text-xs font-medium tracking-widest text-neutral-400 dark:text-neutral-500">
-                    QAMVIR
-                  </span>
-                </div>
-
-                <nav className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center gap-1 px-8 pb-16">
-                  {visibleNavItems.map((item, index) => (
-                    <motion.a
+                <motion.ul
+                  className="m-0 w-full list-none px-0 pl-[12vw] pr-5 md:pl-[8vw] max-[480px]:pl-[6vw]"
+                  variants={listVariants}
+                >
+                  {menuItems.map((item) => (
+                    <motion.li
                       key={item.href}
-                      href={item.href}
+                      variants={itemVariants}
                       onClick={closeMenu}
-                      initial={{ x: language === "ar" ? 40 : -40, opacity: 0 }}
-                      animate={{ x: 0, opacity: 1 }}
-                      exit={{ x: language === "ar" ? 40 : -40, opacity: 0 }}
-                      whileHover={{
-                        scale: 1.075,
-                        transition: { duration: 0.24, ease: "easeOut" },
-                      }}
-                      whileTap={{ scale: 0.98 }}
-                      transition={{
-                        x: { duration: 0.55, delay: 0.18 + index * 0.09, ease: [0.16, 1, 0.3, 1] },
-                        opacity: { duration: 0.55, delay: 0.18 + index * 0.09 },
-                      }}
-                      className="block origin-left rounded-xl px-3 py-4 text-[clamp(1.8rem,6vw,4.5rem)] font-bold text-neutral-950 transition-all duration-200 hover:text-black hover:[text-shadow:0_0_7px_rgba(0,0,0,0.55),0_0_18px_rgba(0,0,0,0.3)] dark:text-white dark:hover:text-white dark:hover:[text-shadow:0_0_7px_rgba(255,255,255,0.85),0_0_18px_rgba(255,255,255,0.65),0_0_34px_rgba(255,255,255,0.4)]"
+                      className="group relative cursor-pointer py-3"
                     >
-                      {item.label}
-                    </motion.a>
+                      <a
+                        href={item.href}
+                        className="relative inline-block font-bold uppercase tracking-[-0.02em] text-white/35 no-underline transition-all duration-300 group-hover:translate-x-1 group-hover:tracking-[0.02em] group-hover:text-white group-hover:[text-shadow:0_0_20px_rgba(255,255,255,0.4)] dark:text-black/35 dark:group-hover:text-black dark:group-hover:[text-shadow:0_0_20px_rgba(0,0,0,0.35)]"
+                        style={{
+                          fontFamily: "Arial, Helvetica, sans-serif",
+                          fontSize: "clamp(1.8rem, 6vw, 4.5rem)",
+                        }}
+                      >
+                        <span className="absolute -left-10 top-1/2 h-2 w-[25px] -translate-y-1/2 rounded-full bg-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:bg-black" />
+                        {item.label}
+                      </a>
+                    </motion.li>
                   ))}
-
-                  <motion.a
-                    href="#contact"
-                    onClick={closeMenu}
-                    initial={{ y: 24, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: 24, opacity: 0 }}
-                    whileHover={{
-                      scale: 1.035,
-                      boxShadow: "0 0 12px rgba(255,255,255,0.35), 0 0 28px rgba(255,255,255,0.18)",
-                    }}
-                    transition={{ duration: 0.5, delay: 0.58, ease: "easeOut" }}
-                    className="mt-5 flex w-full items-center justify-center gap-2 rounded-xl bg-black px-5 py-4 text-sm font-bold text-white dark:bg-white dark:text-black"
-                  >
-                    <span>{language === "ar" ? "تواصل معي" : "Contact Me"}</span>
-                    <ArrowUpRight className="h-4 w-4" />
-                  </motion.a>
-                </nav>
+                </motion.ul>
               </motion.div>
             )}
           </AnimatePresence>,
