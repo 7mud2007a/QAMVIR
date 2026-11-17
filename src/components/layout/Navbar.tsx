@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 import { useApp } from "@/context/AppContext";
 import { BrandLogo } from "@/components/ui/BrandLogo";
 import { ShimmerButton } from "@/components/ui/ShimmerButton";
-import { Globe, ArrowUpRight, Menu, X } from "lucide-react";
+import { Globe, ArrowUpRight } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
 export const Navbar: React.FC = () => {
@@ -21,7 +21,7 @@ export const Navbar: React.FC = () => {
       return;
     }
 
-    // Start the circular reveal from the hamburger's current position.
+    // Capture the button's viewport center once; both reveal and collapse use it.
     const rect = menuButtonRef.current?.getBoundingClientRect();
     if (rect) {
       setMenuOrigin({
@@ -109,7 +109,7 @@ export const Navbar: React.FC = () => {
           </a>
         </div>
 
-        {/* Keep the language switch and hamburger exactly in their existing header position. */}
+        {/* The hamburger stays in its original header position. */}
         <div className="flex sm:hidden items-center gap-2">
           <button
             onClick={toggleLanguage}
@@ -127,22 +127,33 @@ export const Navbar: React.FC = () => {
             aria-controls="qamvir-mobile-navigation"
           >
             <span className="sr-only">{mobileMenuOpen ? "Close menu" : "Open menu"}</span>
-            <span className="relative flex h-5 w-5 items-center justify-center">
-              <Menu
-                className={
-                  "absolute h-5 w-5 transition-all duration-200 " +
-                  (mobileMenuOpen
-                    ? "rotate-90 scale-75 opacity-0"
-                    : "rotate-0 scale-100 opacity-100")
-                }
+            <span className="relative flex h-5 w-5 items-center justify-center" aria-hidden="true">
+              <motion.span
+                className="absolute h-[2px] w-5 rounded-full bg-current"
+                initial={false}
+                animate={{
+                  y: mobileMenuOpen ? 0 : -6,
+                  rotate: mobileMenuOpen ? 45 : 0,
+                }}
+                transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
               />
-              <X
-                className={
-                  "absolute h-5 w-5 transition-all duration-200 " +
-                  (mobileMenuOpen
-                    ? "rotate-0 scale-100 opacity-100"
-                    : "-rotate-90 scale-75 opacity-0")
-                }
+              <motion.span
+                className="absolute h-[2px] w-5 rounded-full bg-current"
+                initial={false}
+                animate={{
+                  opacity: mobileMenuOpen ? 0 : 1,
+                  scaleX: mobileMenuOpen ? 0.35 : 1,
+                }}
+                transition={{ duration: 0.2, ease: "easeInOut" }}
+              />
+              <motion.span
+                className="absolute h-[2px] w-5 rounded-full bg-current"
+                initial={false}
+                animate={{
+                  y: mobileMenuOpen ? 0 : 6,
+                  rotate: mobileMenuOpen ? -45 : 0,
+                }}
+                transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
               />
             </span>
           </button>
@@ -151,23 +162,29 @@ export const Navbar: React.FC = () => {
 
       {typeof document !== "undefined" &&
         createPortal(
-          <AnimatePresence>
+          <AnimatePresence initial={false}>
             {mobileMenuOpen && (
               <motion.div
                 id="qamvir-mobile-navigation"
                 className="sm:hidden fixed inset-0 z-[99] flex min-h-[100svh] flex-col overflow-y-auto bg-white text-neutral-950 dark:bg-black dark:text-white"
+                style={{
+                  clipPath: `circle(0px at ${menuOrigin.x}px ${menuOrigin.y}px)`,
+                }}
                 initial={{
                   clipPath: `circle(0px at ${menuOrigin.x}px ${menuOrigin.y}px)`,
                 }}
                 animate={{
-                  clipPath: `circle(150vmax at ${menuOrigin.x}px ${menuOrigin.y}px)`,
+                  clipPath: `circle(160vmax at ${menuOrigin.x}px ${menuOrigin.y}px)`,
                 }}
                 exit={{
+                  // Collapse back to the exact same hamburger center, not a corner.
                   clipPath: `circle(0px at ${menuOrigin.x}px ${menuOrigin.y}px)`,
                 }}
                 transition={{
-                  duration: 0.95,
-                  ease: [0.22, 1, 0.36, 1],
+                  clipPath: {
+                    duration: 1.15,
+                    ease: [0.76, 0, 0.24, 1],
+                  },
                 }}
               >
                 <div className="flex min-h-20 items-center justify-between px-6 pt-4">
@@ -188,12 +205,23 @@ export const Navbar: React.FC = () => {
                       initial={{ x: language === "ar" ? 40 : -40, opacity: 0 }}
                       animate={{ x: 0, opacity: 1 }}
                       exit={{ x: language === "ar" ? 40 : -40, opacity: 0 }}
+                      whileHover={{
+                        scale: 1.075,
+                        color: "#ffffff",
+                        textShadow:
+                          "0 0 7px rgba(255,255,255,0.85), 0 0 18px rgba(255,255,255,0.65), 0 0 34px rgba(255,255,255,0.4)",
+                      }}
+                      whileTap={{ scale: 0.98 }}
                       transition={{
-                        duration: 0.65,
-                        delay: 0.22 + index * 0.085,
+                        duration: 0.55,
+                        delay: 0.18 + index * 0.09,
                         ease: [0.16, 1, 0.3, 1],
                       }}
-                      className="block rounded-xl px-3 py-4 text-[clamp(1.8rem,6vw,4.5rem)] font-bold text-neutral-950 transition-colors hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-900"
+                      className="block origin-left rounded-xl px-3 py-4 text-[clamp(1.8rem,6vw,4.5rem)] font-bold text-neutral-950 dark:text-white"
+                      style={{
+                        textShadow: "0 0 0 rgba(255,255,255,0)",
+                        transition: "text-shadow 220ms ease",
+                      }}
                     >
                       {item.label}
                     </motion.a>
@@ -205,7 +233,11 @@ export const Navbar: React.FC = () => {
                     initial={{ y: 24, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     exit={{ y: 24, opacity: 0 }}
-                    transition={{ duration: 0.55, delay: 0.62, ease: "easeOut" }}
+                    whileHover={{
+                      scale: 1.035,
+                      boxShadow: "0 0 12px rgba(255,255,255,0.35), 0 0 28px rgba(255,255,255,0.18)",
+                    }}
+                    transition={{ duration: 0.5, delay: 0.58, ease: "easeOut" }}
                     className="mt-5 flex w-full items-center justify-center gap-2 rounded-xl bg-black px-5 py-4 text-sm font-bold text-white dark:bg-white dark:text-black"
                   >
                     <span>{language === "ar" ? "تواصل معي" : "Contact Me"}</span>
