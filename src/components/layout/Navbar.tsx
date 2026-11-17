@@ -237,8 +237,8 @@ export const Navbar: React.FC = () => {
         <div
           className={`max-w-7xl mx-auto rounded-2xl transition-all duration-300 px-4 sm:px-6 py-3 flex items-center justify-between border ${
             scrolled
-              ? "bg-white/90 dark:bg-black/90 backdrop-blur-md border-neutral-300 dark:border-neutral-800 shadow-md"
-              : "bg-white/70 dark:bg-black/70 backdrop-blur-sm border-neutral-200 dark:border-neutral-800"
+              ? "bg-black/75 backdrop-blur-md border-white/15 shadow-md"
+              : "bg-black/55 backdrop-blur-sm border-white/10"
           }`}
         >
           <a href="#hero" className="flex items-center">
