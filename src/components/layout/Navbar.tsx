@@ -62,8 +62,8 @@ export const Navbar: React.FC = () => {
 
       const open = gsap.timeline({ paused: true });
       const close = gsap.timeline({ paused: true });
-      const lineIcon = nav.parentElement?.querySelector(".qamvir-menu-line");
-      const closeIcon = nav.parentElement?.querySelector(".qamvir-menu-close");
+      const lineIcon = nav.parentElement?.querySelector(".qamvir-menu-line") ?? null;
+      const closeIcon = nav.parentElement?.querySelector(".qamvir-menu-close") ?? null;
       const buttonBg = button.querySelector(".qamvir-menu-bg");
       const items = nav.querySelectorAll("li");
 
