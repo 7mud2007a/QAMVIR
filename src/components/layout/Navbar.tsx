@@ -1,49 +1,211 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useApp } from "@/context/AppContext";
 import { BrandLogo } from "@/components/ui/BrandLogo";
 import { ShimmerButton } from "@/components/ui/ShimmerButton";
 import { Globe, ArrowUpRight } from "lucide-react";
-import { AnimatePresence, motion, type Variants } from "framer-motion";
+
+type GsapTimeline = {
+  set(target: Element | null, vars: Record<string, unknown>): GsapTimeline;
+  to(
+    target: Element | NodeListOf<Element> | null,
+    vars: Record<string, unknown>,
+    position?: number | string
+  ): GsapTimeline;
+  play(): GsapTimeline;
+  seek(position: number): GsapTimeline;
+  kill(): void;
+};
+
+type GsapApi = {
+  timeline(options: { paused: boolean }): GsapTimeline;
+};
+
+declare global {
+  interface Window {
+    gsap?: GsapApi;
+  }
+}
 
 export const Navbar: React.FC = () => {
   const { language, toggleLanguage, navigation, siteCopy } = useApp();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [menuOrigin, setMenuOrigin] = useState({ x: 0, y: 0 });
+  const [menuReady, setMenuReady] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
-
-  const toggleMobileMenu = () => {
-    if (mobileMenuOpen) {
-      setMobileMenuOpen(false);
-      return;
-    }
-    const rect = menuButtonRef.current?.getBoundingClientRect();
-    if (rect) {
-      setMenuOrigin({
-        x: rect.left + rect.width / 2,
-        y: rect.top + rect.height / 2,
-      });
-    }
-    setMobileMenuOpen(true);
-  };
+  const menuRef = useRef<HTMLElement>(null);
+  const openTl = useRef<GsapTimeline | null>(null);
+  const closeTl = useRef<GsapTimeline | null>(null);
+  const activeRef = useRef(false);
 
   useEffect(() => {
+    setMounted(true);
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
+    let cancelled = false;
+    let script = document.querySelector<HTMLScriptElement>('script[data-qamvir-gsap="true"]');
+    const initialize = () => {
+      if (cancelled || !window.gsap || !menuRef.current) return;
+      const gsap = window.gsap;
+      const nav = menuRef.current;
+      const button = menuButtonRef.current;
+      if (!button) return;
+
+      const open = gsap.timeline({ paused: true });
+      const close = gsap.timeline({ paused: true });
+      const lineIcon = nav.parentElement?.querySelector(".qamvir-menu-line");
+      const closeIcon = nav.parentElement?.querySelector(".qamvir-menu-close");
+      const buttonBg = button.querySelector(".qamvir-menu-bg");
+      const items = nav.querySelectorAll("li");
+
+      open
+        .set(button, { pointerEvents: "none" })
+        .to(nav, {
+          clipPath: () => {
+            const rect = button.getBoundingClientRect();
+            const x = rect.left + rect.width / 2;
+            const y = rect.top + rect.height / 2;
+            return `circle(200% at ${x}px ${y}px)`;
+          },
+          duration: 1.5,
+          ease: "power4.out",
+        }, 0)
+        .to(items, {
+          x: 0,
+          opacity: 1,
+          pointerEvents: "all",
+          duration: 1.25,
+          stagger: 0.1,
+          ease: "elastic.out(1.15, .95)",
+        }, 0)
+        .to(closeIcon, {
+          opacity: 1,
+          yPercent: -125,
+          duration: 1,
+          ease: "power4.out",
+        }, 0)
+        .to(lineIcon, {
+          opacity: 0,
+          yPercent: -125,
+          duration: 1,
+          ease: "power4.out",
+        }, 0)
+        .set(button, { pointerEvents: "all" });
+
+      close
+        .set(button, { pointerEvents: "none" })
+        .to(items, {
+          x: language === "ar" ? 200 : -200,
+          opacity: 0,
+          pointerEvents: "none",
+          duration: 1,
+          stagger: 0.1,
+          ease: "power4.out",
+        }, 0)
+        .to(nav, {
+          clipPath: () => {
+            const rect = button.getBoundingClientRect();
+            const x = rect.left + rect.width / 2;
+            const y = rect.top + rect.height / 2;
+            return `circle(0px at ${x}px ${y}px)`;
+          },
+          duration: 1.2,
+          ease: "power4.out",
+        }, "-=1")
+        .to(buttonBg, {
+          scale: 0.9,
+          duration: 0.25,
+          ease: "elastic.out",
+        }, "-=.9")
+        .to(buttonBg, {
+          scale: 1,
+          duration: 0.25,
+          ease: "elastic.out",
+        }, "-=.5")
+        .to(closeIcon, {
+          opacity: 0,
+          yPercent: 125,
+          duration: 1,
+          ease: "power4.out",
+        }, 0)
+        .to(lineIcon, {
+          opacity: 1,
+          yPercent: 0,
+          duration: 1,
+          ease: "power4.out",
+        }, 0)
+        .set(button, { pointerEvents: "all" });
+
+      openTl.current = open;
+      closeTl.current = close;
+      setMenuReady(true);
+    };
+
+    if (window.gsap) {
+      initialize();
+    } else {
+      if (!script) {
+        script = document.createElement("script");
+        script.src = "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js";
+        script.async = true;
+        script.dataset.qamvirGsap = "true";
+        document.head.appendChild(script);
+      }
+      script.addEventListener("load", initialize);
+    }
+
+    return () => {
+      cancelled = true;
+      script?.removeEventListener("load", initialize);
+      openTl.current?.kill();
+      closeTl.current?.kill();
+      openTl.current = null;
+      closeTl.current = null;
+    };
+  }, [language]);
+
+  const toggleMobileMenu = useCallback(() => {
+    if (!menuReady || !openTl.current || !closeTl.current) return;
+    if (!activeRef.current) {
+      const rect = menuButtonRef.current?.getBoundingClientRect();
+      if (!rect) return;
+      const x = rect.left + rect.width / 2;
+      const y = rect.top + rect.height / 2;
+      if (menuRef.current) {
+        menuRef.current.style.clipPath = `circle(0px at ${x}px ${y}px)`;
+      }
+      openTl.current.seek(0).play();
+      activeRef.current = true;
+      setMobileMenuOpen(true);
+    } else {
+      closeTl.current.seek(0).play();
+      activeRef.current = false;
+      setMobileMenuOpen(false);
+    }
+  }, [menuReady]);
+
+  const closeMenu = useCallback(() => {
+    if (!activeRef.current || !closeTl.current) return;
+    closeTl.current.seek(0).play();
+    activeRef.current = false;
+    setMobileMenuOpen(false);
+  }, []);
+
+  useEffect(() => {
     if (!mobileMenuOpen) return;
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setMobileMenuOpen(false);
+      if (event.key === "Escape") closeMenu();
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [mobileMenuOpen]);
+  }, [mobileMenuOpen, closeMenu]);
 
   const visibleNavItems = navigation
     .filter((item) => item.enabled)
@@ -59,182 +221,133 @@ export const Navbar: React.FC = () => {
       href: index === 2 ? "#projects" : item.href,
     }));
 
-  const closeMenu = () => setMobileMenuOpen(false);
   const menuItems = [
     ...visibleNavItems,
     { label: language === "ar" ? "تواصل معي" : "Contact", href: "#contact" },
   ];
 
-  const menuVariants: Variants = {
-    closed: {
-      clipPath: `circle(0px at ${menuOrigin.x}px ${menuOrigin.y}px)`,
-      transition: { duration: 1.2, ease: [0.76, 0, 0.24, 1] },
-    },
-    open: {
-      clipPath: `circle(200% at ${menuOrigin.x}px ${menuOrigin.y}px)`,
-      transition: { duration: 1.5, ease: [0.22, 1, 0.36, 1] },
-    },
-  };
-
-  const listVariants: Variants = {
-    closed: {
-      transition: { staggerChildren: 0.1, staggerDirection: -1 },
-    },
-    open: {
-      transition: { delayChildren: 0.05, staggerChildren: 0.1 },
-    },
-  };
-
-  const itemVariants: Variants = {
-    closed: {
-      x: language === "ar" ? 200 : -200,
-      opacity: 0,
-      transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
-    },
-    open: {
-      x: 0,
-      opacity: 1,
-      transition: { duration: 1.15, ease: [0.34, 1.56, 0.64, 1] },
-    },
-  };
-
   return (
-    <header className="fixed top-0 left-0 right-0 z-[100] px-4 sm:px-8 py-4 transition-all duration-300">
-      <style>{'@import url("https://fonts.googleapis.com/css2?family=Krona+One&display=swap");'}</style>
-      <div
-        className={`max-w-7xl mx-auto rounded-2xl transition-all duration-300 px-4 sm:px-6 py-3 flex items-center justify-between border ${
-          scrolled
-            ? "bg-white/90 dark:bg-black/90 backdrop-blur-md border-neutral-300 dark:border-neutral-800 shadow-md"
-            : "bg-white/70 dark:bg-black/70 backdrop-blur-sm border-neutral-200 dark:border-neutral-800"
-        }`}
-      >
-        <a href="#hero" className="flex items-center">
-          <BrandLogo />
-        </a>
-
-        <nav className="hidden md:flex items-center gap-8">
-          {visibleNavItems.map((item, idx) => (
-            <a
-              key={idx}
-              href={item.href}
-              className="text-sm font-semibold text-neutral-800 dark:text-neutral-200 hover:text-black dark:hover:text-white transition-colors"
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
-
-        <div className="hidden sm:flex items-center gap-3">
-          <button
-            onClick={toggleLanguage}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border border-neutral-300 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-900 hover:bg-neutral-200 dark:hover:bg-neutral-800 text-neutral-900 dark:text-neutral-100 transition-colors"
-            aria-label="Toggle Language"
-          >
-            <Globe className="w-3.5 h-3.5" />
-            <span>{language === "ar" ? "English" : "العربية"}</span>
-          </button>
-          <a href="#contact">
-            <ShimmerButton
-              variant="primary"
-              className="!py-2 !px-4 !text-xs"
-              icon={<ArrowUpRight className="w-3.5 h-3.5" />}
-            >
-              {language === "ar" ? siteCopy.nav_cta_ar : siteCopy.nav_cta_en}
-            </ShimmerButton>
+    <>
+      <header className="fixed top-0 left-0 right-0 z-[100] px-4 sm:px-8 py-4 transition-all duration-300">
+        <style>{'@import url("https://fonts.googleapis.com/css2?family=Krona+One&display=swap");'}</style>
+        <div
+          className={`max-w-7xl mx-auto rounded-2xl transition-all duration-300 px-4 sm:px-6 py-3 flex items-center justify-between border ${
+            scrolled
+              ? "bg-white/90 dark:bg-black/90 backdrop-blur-md border-neutral-300 dark:border-neutral-800 shadow-md"
+              : "bg-white/70 dark:bg-black/70 backdrop-blur-sm border-neutral-200 dark:border-neutral-800"
+          }`}
+        >
+          <a href="#hero" className="flex items-center">
+            <BrandLogo />
           </a>
-        </div>
 
-        <div className="flex sm:hidden items-center gap-2">
-          <button
-            onClick={toggleLanguage}
-            className="px-2.5 py-1.5 rounded-xl text-xs font-bold border border-neutral-300 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100"
-          >
-            {language === "ar" ? "EN" : "عربي"}
-          </button>
+          <nav className="hidden md:flex items-center gap-8">
+            {visibleNavItems.map((item, idx) => (
+              <a
+                key={idx}
+                href={item.href}
+                className="text-sm font-semibold text-neutral-800 dark:text-neutral-200 hover:text-black dark:hover:text-white transition-colors"
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
 
-          <motion.button
-            ref={menuButtonRef}
-            onClick={toggleMobileMenu}
-            className="relative z-[102] flex h-10 w-10 shrink-0 items-center justify-center rounded-[20px] border-0 bg-transparent text-white outline-none"
-            aria-label={mobileMenuOpen ? "Close Navigation Menu" : "Open Navigation Menu"}
-            aria-expanded={mobileMenuOpen}
-            aria-controls="qamvir-mobile-navigation"
-          >
-            <motion.span
-              className="absolute inset-0 rounded-[25%] bg-black shadow-[0_8px_25px_rgba(0,0,0,0.4)] dark:bg-white"
-              animate={
-                mobileMenuOpen
-                  ? { scale: [1, 0.9, 1] }
-                  : { scale: 1 }
-              }
-              transition={{ duration: 0.5, times: [0, 0.5, 1], ease: "easeOut" }}
-            />
-            <span className="sr-only">{mobileMenuOpen ? "Close menu" : "Open menu"}</span>
-            <span className="relative z-10 h-5 w-5 overflow-hidden" aria-hidden="true">
-              <motion.svg
-                viewBox="0 0 448 512"
-                className="absolute left-1/2 top-1/2 h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 fill-white dark:fill-black"
-                animate={{ y: mobileMenuOpen ? "-125%" : "-50%", opacity: mobileMenuOpen ? 0 : 1 }}
-                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+          <div className="hidden sm:flex items-center gap-3">
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border border-neutral-300 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-900 hover:bg-neutral-200 dark:hover:bg-neutral-800 text-neutral-900 dark:text-neutral-100 transition-colors"
+              aria-label="Toggle Language"
+            >
+              <Globe className="w-3.5 h-3.5" />
+              <span>{language === "ar" ? "English" : "العربية"}</span>
+            </button>
+            <a href="#contact">
+              <ShimmerButton
+                variant="primary"
+                className="!py-2 !px-4 !text-xs"
+                icon={<ArrowUpRight className="w-3.5 h-3.5" />}
               >
-                <path d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z" />
-              </motion.svg>
-              <motion.svg
-                viewBox="0 0 320 512"
-                className="absolute left-1/2 top-1/2 h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 fill-white dark:fill-black"
-                animate={{ y: mobileMenuOpen ? "-50%" : "125%", opacity: mobileMenuOpen ? 1 : 0 }}
-                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <path d="M310.6 361.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L160 301.3 54.7 406.7c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L114.7 256 9.4 150.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 210.7l105.3-105.4c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3L205.3 256l105.3 105.4z" />
-              </motion.svg>
-            </span>
-          </motion.button>
-        </div>
-      </div>
+                {language === "ar" ? siteCopy.nav_cta_ar : siteCopy.nav_cta_en}
+              </ShimmerButton>
+            </a>
+          </div>
 
-      {typeof document !== "undefined" &&
-        createPortal(
-          <AnimatePresence initial={false}>
-            {mobileMenuOpen && (
-              <motion.div
-                id="qamvir-mobile-navigation"
-                className="fixed inset-0 z-[99] flex h-[100dvh] w-full items-center overflow-hidden bg-black text-white dark:bg-white dark:text-black"
-                dir={language === "ar" ? "rtl" : "ltr"}
-                variants={menuVariants}
-                initial="closed"
-                animate="open"
-                exit="closed"
-              >
-                <motion.ul
-                  className="m-0 w-full list-none px-0 pl-[12vw] pr-5 md:pl-[8vw] max-[480px]:pl-[6vw]"
-                  variants={listVariants}
+          <div className="flex sm:hidden items-center gap-2">
+            <button
+              onClick={toggleLanguage}
+              className="px-2.5 py-1.5 rounded-xl text-xs font-bold border border-neutral-300 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100"
+            >
+              {language === "ar" ? "EN" : "عربي"}
+            </button>
+
+            <button
+              ref={menuButtonRef}
+              onClick={toggleMobileMenu}
+              disabled={!menuReady}
+              className="relative z-[102] flex h-10 w-10 shrink-0 items-center justify-center rounded-[20px] border-0 bg-transparent outline-none disabled:cursor-wait"
+              aria-label={mobileMenuOpen ? "Close Navigation Menu" : "Open Navigation Menu"}
+              aria-expanded={mobileMenuOpen}
+              aria-controls="qamvir-mobile-navigation"
+            >
+              <span className="qamvir-menu-bg absolute inset-0 rounded-[25%] bg-black shadow-[0_8px_25px_rgba(0,0,0,0.4)] dark:bg-white" />
+              <span className="sr-only">{mobileMenuOpen ? "Close menu" : "Open menu"}</span>
+              <span className="relative z-10 h-5 w-5 overflow-hidden" aria-hidden="true">
+                <svg
+                  viewBox="0 0 448 512"
+                  className="qamvir-menu-line absolute left-1/2 top-1/2 h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 fill-white dark:fill-black"
                 >
-                  {menuItems.map((item) => (
-                    <motion.li
-                      key={item.href}
-                      variants={itemVariants}
-                      onClick={closeMenu}
-                      className="group relative cursor-pointer py-3"
-                    >
-                      <a
-                        href={item.href}
-                        className="relative inline-block font-bold uppercase tracking-[-0.02em] text-white/35 no-underline transition-all duration-300 group-hover:translate-x-1 group-hover:tracking-[0.02em] group-hover:text-white group-hover:[text-shadow:0_0_20px_rgba(255,255,255,0.4)] dark:text-black/35 dark:group-hover:text-black dark:group-hover:[text-shadow:0_0_20px_rgba(0,0,0,0.35)]"
-                        style={{
-                          fontFamily: "'Krona One', sans-serif",
-                          fontSize: "clamp(1.8rem, 6vw, 4.5rem)",
-                        }}
-                      >
-                        <span className="absolute -left-10 top-1/2 h-2 w-[25px] -translate-y-1/2 rounded-full bg-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:bg-black" />
-                        {item.label}
-                      </a>
-                    </motion.li>
-                  ))}
-                </motion.ul>
-              </motion.div>
-            )}
-          </AnimatePresence>,
+                  <path d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z" />
+                </svg>
+                <svg
+                  viewBox="0 0 320 512"
+                  className="qamvir-menu-close absolute left-1/2 top-1/2 h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 fill-white dark:fill-black"
+                  style={{ opacity: 0, transform: "translate(-50%, -50%) translateY(125%)" }}
+                >
+                  <path d="M310.6 361.4c12.5 12.5 32.8 12.5 45.3 0L160 301.3 54.7 406.7c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L114.7 256 9.4 150.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 210.7l105.3-105.4c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3L205.3 256l105.3 105.4z" />
+                </svg>
+              </span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {mounted &&
+        createPortal(
+          <nav
+            ref={menuRef}
+            id="qamvir-mobile-navigation"
+            aria-hidden={!mobileMenuOpen}
+            className="fixed inset-0 z-[99] flex h-[100dvh] w-full items-center overflow-hidden bg-black text-white dark:bg-white dark:text-black"
+            dir={language === "ar" ? "rtl" : "ltr"}
+            style={{ clipPath: "circle(0px at 0px 0px)" }}
+          >
+            <ul className="m-0 w-full list-none pl-[12vw] pr-5 md:pl-[8vw] max-[480px]:pl-[6vw]">
+              {menuItems.map((item) => (
+                <li
+                  key={item.href}
+                  onClick={closeMenu}
+                  className="qamvir-menu-item group relative cursor-pointer py-3"
+                  style={{ transform: language === "ar" ? "translateX(200px)" : "translateX(-200px)", opacity: 0, pointerEvents: "none" }}
+                >
+                  <a
+                    href={item.href}
+                    tabIndex={mobileMenuOpen ? 0 : -1}
+                    className="relative inline-block font-bold uppercase tracking-[-0.02em] text-white/35 no-underline transition-all duration-300 group-hover:translate-x-1 group-hover:tracking-[0.02em] group-hover:text-white group-hover:[text-shadow:0_0_20px_rgba(255,255,255,0.4)] dark:text-black/35 dark:group-hover:text-black dark:group-hover:[text-shadow:0_0_20px_rgba(0,0,0,0.35)]"
+                    style={{
+                      fontFamily: "'Krona One', sans-serif",
+                      fontSize: "clamp(1.8rem, 6vw, 4.5rem)",
+                    }}
+                  >
+                    <span className="absolute -left-10 top-1/2 h-2 w-[25px] -translate-y-1/2 rounded-full bg-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:bg-black" />
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>,
           document.body
         )}
-    </header>
+    </>
   );
 };
