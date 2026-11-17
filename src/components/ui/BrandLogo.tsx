@@ -17,66 +17,33 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
   return (
     <div className="flex items-center gap-3 select-none group cursor-pointer">
       <div className={`relative flex items-center justify-center ${className}`}>
-        {/* Monolithic Geometric Monochrome "7" SVG */}
+        {/* Custom Q/VK monogram recreated as a transparent SVG */}
         <svg
-          viewBox="0 0 100 100"
+          viewBox="0 0 640 540"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           className="relative w-full h-full drop-shadow-sm transition-transform duration-300 group-hover:scale-105"
+          aria-label="QAMVIR logo"
+          role="img"
         >
-          <defs>
-            <linearGradient
-              id="brand7GradientDark"
-              x1="0%"
-              y1="0%"
-              x2="100%"
-              y2="100%"
-            >
-              <stop offset="0%" stopColor="#ffffff" />
-              <stop offset="100%" stopColor="#a3a3a3" />
-            </linearGradient>
-
-            <linearGradient
-              id="brand7AccentDark"
-              x1="0%"
-              y1="0%"
-              x2="100%"
-              y2="0%"
-            >
-              <stop offset="0%" stopColor="#e5e5e5" />
-              <stop offset="100%" stopColor="#737373" />
-            </linearGradient>
-          </defs>
-
-          {/* Outer Monochromatic Frame */}
+          {/* Circular Q-shaped outer mark with a transparent center */}
           <path
-            d="M 10 15 L 90 15 L 85 28 L 22 28 L 22 30 L 78 30 L 42 88 L 26 88 L 58 35 L 10 35 Z"
             fill="currentColor"
-            className="text-neutral-900 dark:text-white"
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M270 10C390 10 468 84 468 184L420 270C416 177 352 108 272 108C188 108 132 174 132 260C132 328 169 385 232 416L270 493C130 462 38 368 38 258C38 118 136 10 270 10ZM270 66C169 66 88 145 88 258C88 326 119 383 171 420C126 379 105 326 105 260C105 158 174 88 272 88C342 88 402 130 433 191C425 118 360 66 270 66Z"
           />
-
-          {/* Angular Precision Cut Lines */}
+          {/* Angular central stroke */}
           <path
-            d="M 28 20 L 82 20 L 78 26 L 24 26 Z"
             fill="currentColor"
-            className="text-neutral-400 dark:text-neutral-500"
-            opacity="0.85"
+            d="M210 139L263 111L391 416L352 500H300L158 205L210 139ZM207 181L190 207L318 468H337L359 420L248 156L207 181Z"
+            fillRule="evenodd"
+            clipRule="evenodd"
           />
-
+          {/* Rising diagonal and lower right arm */}
           <path
-            d="M 46 88 L 52 88 L 74 52 L 68 52 Z"
             fill="currentColor"
-            className="text-neutral-400 dark:text-neutral-500"
-            opacity="0.75"
-          />
-
-          {/* Precision Corner Accent Point */}
-          <circle
-            cx="86"
-            cy="18"
-            r="3"
-            fill="currentColor"
-            className="text-neutral-900 dark:text-white"
+            d="M506 20H616L463 325L610 500H500L388 374L424 302L510 405L414 322L506 20Z"
           />
         </svg>
       </div>
