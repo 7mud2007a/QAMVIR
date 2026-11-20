@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useApp } from "@/context/AppContext";
-import { ArrowUpLeft, CarFront, Armchair, Building2, PlugZap, Home, Zap } from "lucide-react";
+import { ArrowUpLeft, CarFront, Armchair, Building2, PlugZap, Home } from "lucide-react";
 
 const projects = [
   {
@@ -137,7 +137,7 @@ export const ProjectsSection: React.FC = () => {
 
                 <div className="p-2.5 sm:p-4">
                   <div className="mb-2 flex items-center justify-between gap-1">
-                    <span className="truncate rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 px-2 py-0.5 text-[7px] sm:text-[9px]] font-mono tracking-wide text-neutral-500 dark:text-neutral-400">
+                    <span className="truncate rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 px-2 py-0.5 text-[7px] sm:text-[9px] font-mono tracking-wide text-neutral-500 dark:text-neutral-400">
                       {isAr ? project.categoryAr : project.categoryEn}
                     </span>
                     <span className="shrink-0 text-[8px] sm:text-[10px] font-mono text-neutral-400 dark:text-neutral-500">{String(idx + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}</span>
