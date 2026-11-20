@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS public.contact_info (
   subtitle_ar TEXT DEFAULT 'تواصل معنا مباشرة عبر إحدى الوسائل التالية.',
   subtitle_en TEXT DEFAULT 'Contact us directly through one of the following channels.',
   whatsapp_number TEXT NOT NULL DEFAULT '0930431817',
-  telegram_username TEXT NOT NULL DEFAULT '@Dev7mud',
+  telegram_username TEXT NOT NULL DEFAULT '@qamviir',
   instagram_username TEXT NOT NULL DEFAULT '@qamvir',
   contact_text_ar TEXT DEFAULT 'يسعدنا الاستماع إلى تفاصيل مشروعك والإجابة عن جميع استفساراتك.',
   contact_text_en TEXT DEFAULT 'We are ready to hear about your project and answer all your questions.',
@@ -293,7 +293,7 @@ VALUES (
   'دعنا نبدأ في تنفيذ موقعك', 'Let''s Build Your Website',
   'تواصل معنا مباشرة عبر إحدى الوسائل التالية.', 'Contact us directly through one of the following channels.',
   '0930431817',
-  '@Dev7mud',
+  '@qamviir',
   '@qamvir',
   'تواصل معنا مباشرة لتنفيذ موقعك بأعلى جودة.',
   'Reach out to get your high quality website created.'
