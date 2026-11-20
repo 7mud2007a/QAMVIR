@@ -71,10 +71,10 @@ export const Footer: React.FC = () => {
             </a>
 
             <a
-              href="https://t.me/Dev7mud"
+              href="https://t.me/qamviir"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Telegram @Dev7mud"
+              aria-label="Telegram @qamviir"
               className="p-3 rounded-2xl bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 text-neutral-800 dark:text-neutral-200 transition-colors"
             >
               <Send className="w-4 h-4" />
