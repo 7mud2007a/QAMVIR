@@ -20,7 +20,8 @@ export const ContactSection: React.FC = () => {
 
   const whatsappUrl = `https://wa.me/${cleanWhatsapp}?text=${whatsappMessage}`;
 
-  const cleanTelegram = (contactInfo.telegram_username || "@Dev7mud").replace("@", "");
+  const telegramUsername = "qamviir";
+  const cleanTelegram = telegramUsername.replace("@", "");
   const telegramUrl = `https://t.me/${cleanTelegram}`;
 
   const cleanInstagram = (contactInfo.instagram_username || "@qamvir").replace("@", "");
@@ -88,7 +89,7 @@ export const ContactSection: React.FC = () => {
                     {isAr ? siteCopy.contact_telegram_label_ar : siteCopy.contact_telegram_label_en}
                   </h4>
                   <p className="text-xs font-mono text-neutral-600 dark:text-neutral-400 mt-0.5">
-                    {contactInfo.telegram_username}
+                    @{telegramUsername}
                   </p>
                 </div>
               </div>
