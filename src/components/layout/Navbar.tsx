@@ -335,13 +335,13 @@ export const Navbar: React.FC = () => {
                 <li
                   key={item.href}
                   onClick={closeMenu}
-                  className="qamvir-menu-item group relative cursor-pointer py-3"
+                  className="qamvir-menu-item group relative cursor-pointer border-0 py-3 before:content-none after:content-none"
                   style={{ transform: language === "ar" ? "translateX(200px)" : "translateX(-200px)", opacity: 0, pointerEvents: "none" }}
                 >
                   <a
                     href={item.href}
                     tabIndex={mobileMenuOpen ? 0 : -1}
-                    className="relative inline-block font-sans font-bold uppercase tracking-[-0.02em] text-white/35 no-underline transition-all duration-300 group-hover:translate-x-1 group-hover:tracking-[0.02em] group-hover:text-white group-hover:[text-shadow:0_0_20px_rgba(255,255,255,0.4)]"
+                    className="relative inline-block font-sans font-bold uppercase tracking-[-0.02em] text-white !opacity-100 no-underline border-0 shadow-none transition-all duration-300 group-hover:translate-x-1 group-hover:tracking-[0.02em] group-hover:!text-white group-hover:[text-shadow:0_0_20px_rgba(255,255,255,0.4)]"
                     style={{ fontSize: "clamp(1.8rem, 6vw, 4.5rem)" }}
                   >
                     <span className="absolute -left-10 top-1/2 h-2 w-[25px] -translate-y-1/2 rounded-full bg-white opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
